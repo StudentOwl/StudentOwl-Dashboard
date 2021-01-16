@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://api-studentowl.herokuapp.com/API/V1.0/'
+  apiUrl: 'http://localhost:3000/'
 };
 
 /*

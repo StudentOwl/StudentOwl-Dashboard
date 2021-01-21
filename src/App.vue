@@ -1,6 +1,8 @@
 <template>
-  <v-app>
+  <v-app id="inspire">
+    <v-navigation-drawer v-model="drawer" app> </v-navigation-drawer>
     <v-app-bar app color="primary" dark>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <div class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
@@ -10,15 +12,7 @@
           transition="scale-transition"
           width="40"
         />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+        <v-toolbar-title>Dashboard</v-toolbar-title>
       </div>
 
       <v-spacer></v-spacer>
@@ -34,7 +28,9 @@
     </v-app-bar>
 
     <v-main>
-      <router-view></router-view>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -50,7 +46,7 @@ export default {
   },
 
   data: () => ({
-    //
-  })
+    drawer: null,
+  }),
 };
 </script>

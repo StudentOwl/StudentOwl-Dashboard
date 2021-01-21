@@ -1,10 +1,10 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="students"
+    :items="studentsData"
     :items-per-page="5"
     class="elevation-1"
-    :loading="isLoading"
+    :loading="true"
     loading-text="Loading... Please wait"
   ></v-data-table>
 </template>
@@ -35,8 +35,13 @@ export default {
       { text: "Last application", value: "lastApp" },
       { text: "Total time", value: "totalTime" }
     ],
-    students: this.students
-  })
+    studentsData: []
+  }),
+  computed: {
+    getStudentsData: () => {
+      return this.students;
+    }
+  }
 };
 </script>
 

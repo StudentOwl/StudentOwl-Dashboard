@@ -1,10 +1,10 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="students"
+    :items="studentsData"
     :items-per-page="5"
     class="elevation-1"
-    :loading="isLoading"
+    :loading="true"
     loading-text="Loading... Please wait"
   ></v-data-table>
 </template>
@@ -13,8 +13,14 @@
 export default {
   name: "TableStudents",
   props: {
-    students: Array,
-    isLoading: Boolean,
+    students: {
+      type: Array,
+      default: () => []
+    },
+    isLoading: {
+      type: Boolean,
+      default: true
+    }
   },
   data: () => ({
     headers: [
@@ -22,32 +28,21 @@ export default {
         text: "ID",
         align: "start",
         sortable: true,
-        value: "username",
+        value: "username"
       },
       { text: "Name", value: "name" },
       { text: "Last connection", value: "lastConn" },
       { text: "Last application", value: "lastApp" },
-      { text: "Total time", value: "totalTime" },
+      { text: "Total time", value: "totalTime" }
     ],
-    students: [
-      {
-        username: "lfbermeo",
-        name: "Luisa Fernanda Bermeo",
-        lastConn: "At 3.PM",
-        lastApp: "Edge",
-        totalTime: 15465,
-      },
-      {
-        username: "jjgahona",
-        name: "Juan Jose Gahona",
-        lastConn: "At past day",
-        lastApp: "Architect",
-        totalTime: 1245,
-      },
-    ],
+    studentsData: []
   }),
+  computed: {
+    getStudentsData: () => {
+      return this.students;
+    }
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>

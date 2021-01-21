@@ -1,6 +1,28 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" app> </v-navigation-drawer>
+    <v-navigation-drawer v-model="drawer" app color="secondary">
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="title"> Componentes </v-list-item-title>
+          <v-list-item-subtitle> academicos </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider></v-divider>
+
+      <v-list dense nav>
+        <v-list-item v-for="component in components" :key="component.code" link>
+          <!-- <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon> -->
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
     <v-app-bar app color="primary" dark>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <div class="d-flex align-center">
@@ -17,13 +39,17 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
+      <v-btn text>
+        <v-icon>mdi-home</v-icon>
+        <span class="mr-2">Inicio</span>
+      </v-btn>
+      <v-btn text>
+        <v-icon>mdi-home</v-icon>
+        <span class="mr-2">Acerca de</span>
+      </v-btn>
+      <v-btn text>
+        <v-icon>mdi-home</v-icon>
+        <span class="mr-2">Logout</span>
       </v-btn>
     </v-app-bar>
 
@@ -36,17 +62,18 @@
 </template>
 
 <script>
-// import HelloWorld from "./components/HelloWorld";
-
 export default {
   name: "App",
 
-  components: {
-    // HelloWorld
-  },
+  components: {},
 
   data: () => ({
     drawer: null,
+    components: [
+      { name: "Gestion de proyectos", code: "GTPR01" },
+      { name: "Ingenieria de requisitos", code: "IGRT01" },
+      { name: "GP", code: "GSPR01" },
+    ],
   }),
 };
 </script>

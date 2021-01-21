@@ -72,8 +72,8 @@ export default {
     components: [
       { name: "Gestion de proyectos", code: "GTPR01" },
       { name: "Ingenieria de requisitos", code: "IGRT01" },
-      { name: "GP", code: "GSPR01" },
-    ],
-  }),
+      { name: "GP", code: "GSPR01" }
+    ]
+  })
 };
 </script>

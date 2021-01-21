@@ -3,7 +3,7 @@
     <section class="pa-6">
       <h2 class="text-h2">Estudiantes</h2>
       <!-- TABLA principal en componente -->
-      <table-students></table-students>
+      <table-students :students="studentsData"></table-students>
     </section>
 
     <section class="pa-6">
@@ -28,7 +28,25 @@ export default {
   components: {
     TableStudents,
     CircularChart,
-    CurveChart,
+    CurveChart
   },
+  data: () => ({
+    studentsData: [
+      {
+        username: "lfbermeo",
+        name: "Luisa Fernanda Bermeo",
+        lastConn: "At 3.PM",
+        lastApp: "Edge",
+        totalTime: 15465
+      },
+      {
+        username: "jjgahona",
+        name: "Juan Jose Gahona",
+        lastConn: "At past day",
+        lastApp: "Architect",
+        totalTime: 1245
+      }
+    ]
+  })
 };
 </script>

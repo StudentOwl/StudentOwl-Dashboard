@@ -17,7 +17,7 @@
           </v-list-item-icon> -->
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>{{ component.name }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -41,15 +41,15 @@
 
       <v-btn text>
         <v-icon>mdi-home</v-icon>
-        <span class="mr-2">Inicio</span>
+        <span class="ml-2">Inicio</span>
       </v-btn>
       <v-btn text>
-        <v-icon>mdi-home</v-icon>
-        <span class="mr-2">Acerca de</span>
+        <v-icon>mdi-information-outline</v-icon>
+        <span class="ml-2">Acerca de</span>
       </v-btn>
       <v-btn text>
-        <v-icon>mdi-home</v-icon>
-        <span class="mr-2">Logout</span>
+        <v-icon>mdi-logout</v-icon>
+        <span class="ml-2">Logout</span>
       </v-btn>
     </v-app-bar>
 
@@ -72,8 +72,8 @@ export default {
     components: [
       { name: "Gestion de proyectos", code: "GTPR01" },
       { name: "Ingenieria de requisitos", code: "IGRT01" },
-      { name: "GP", code: "GSPR01" },
-    ],
-  }),
+      { name: "GP", code: "GSPR01" }
+    ]
+  })
 };
 </script>

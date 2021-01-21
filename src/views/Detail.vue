@@ -1,9 +1,12 @@
 <template>
-  <div>{{ $route.params.student }}</div>
+  <v-container>
+    <h1>container</h1>
+  </v-container>
 </template>
 
 <script>
-export default {};
-</script>
 
-<style></style>
+  export default {
+    
+  };
+</script>

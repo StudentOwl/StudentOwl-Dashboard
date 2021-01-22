@@ -70,3 +70,22 @@ export async function getLogsByComponentAndStudent(
     console.log(err);
   }
 }
+
+export async function getNamesbyStudent (
+  studentId
+) { 
+  var student = `&msStudent=${studentId}`;
+
+  var query = `${API_URI}api/v1.0/logs/all?student=${student}`;
+  console.log(query);
+  try {
+    const res = await axios.get(query);
+    if (res) {
+      return res;
+    } else {
+      return null;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}

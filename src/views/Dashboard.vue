@@ -78,7 +78,7 @@ export default {
       const resultado = await getLogsByComponent(this.componentId, this.dates);
       this.logsData = resultado.data.data;
     },
-  
+
 
     onDatesUpdate(newDates) {
       this.dates = newDates;

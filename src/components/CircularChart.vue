@@ -11,8 +11,12 @@
 
 <script>
 import {getDataToolbyDate } from "../utils/dataLoader";
+//import ChartDoughnutBase from './DoughnutChart.vue'
 export default {
   name: "CircularChart",
+  components:{
+    //ChartDoughnutBase
+  },
   props: {
   componentId:{
     type:String,
@@ -34,9 +38,9 @@ loaded: false,
     async mounted () {
     this.loaded = false
     try {
-      const { dataTools } = await getDataToolbyDate(this.componentId, this.dates);
-      this.chartdata = dataTools
-    
+        const resultado = await getDataToolbyDate(this.componentId, this.dates);
+      this.chartdata = resultado.data;
+
       this.loaded = true
     } catch (e) {
       console.error(e,"No se ejectuto bien el mountd")

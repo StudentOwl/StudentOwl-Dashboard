@@ -49,11 +49,11 @@ export default {
   data: () => ({
     input: {
       username: "",
-      password: "",
-    },
+      password: ""
+    }
   }),
   methods: {
-    login: function () {
+    login: function() {
       if (this.input.username != "" && this.input.password != "") {
         if (
           this.input.username == this.$parent.studentOwlAccount.username &&
@@ -67,8 +67,8 @@ export default {
       } else {
         console.log("Es necesario llenar los campos");
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

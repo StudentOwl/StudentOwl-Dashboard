@@ -71,9 +71,7 @@ export async function getLogsByComponentAndStudent(
   }
 }
 
-export async function getNamesbyStudent (
-  studentId
-) { 
+export async function getNamesbyStudent(studentId) {
   var student = `&msStudent=${studentId}`;
 
   var query = `${API_URI}api/v1.0/logs/all?student=${student}`;

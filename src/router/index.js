@@ -13,7 +13,12 @@ const routes = [
   {
     path: "/detail/:student",
     name: "Detail",
+<<<<<<< Updated upstream
     component: require('../views/Detail.vue').default
+=======
+    props: true,
+    component: require("../views/Detail.vue").default
+>>>>>>> Stashed changes
   },
   {
     path: "/about",

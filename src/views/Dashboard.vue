@@ -14,8 +14,11 @@
 
       <!-- GRAFICOS GENERALES en componente -->
       <div class="d-flex justify-space-between mb-6">
-        <circular-chart></circular-chart>
-        <curve-chart></curve-chart>
+        <circular-chart
+          :conponentId="componentId"
+          :dates="dates"
+        ></circular-chart>
+        <curve-chart :conponentId="componentId" :dates="dates"></curve-chart>
       </div>
     </section>
 

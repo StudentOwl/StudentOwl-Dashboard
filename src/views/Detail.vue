@@ -27,7 +27,6 @@
 </template>
 
 <script>
-<<<<<<< Updated upstream
 
   import CurveChart from "../components/CurveChart";
   import TableDetails from "../components/TableDetails";
@@ -40,12 +39,10 @@
   import { getLogsByComponentAndStudent } from "../utils/dataLoader";
   import { getPastWeek } from "../utils/dateutils";
 
->>>>>>> Stashed changes
   export default {
     name: "Detail",
     components: {
       TableDetails,
-<<<<<<< Updated upstream
       CurveChart,
 
     },
@@ -81,7 +78,6 @@
     }
   }
 }
-=======
       CurveChart
     },
     props: {
@@ -111,5 +107,4 @@
       }
     }
   }
->>>>>>> Stashed changes
 </script>

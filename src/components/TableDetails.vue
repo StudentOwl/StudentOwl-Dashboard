@@ -34,19 +34,11 @@
           sortable: true,
           value: "applicationName"
         },
-        { text: "Tiempo", value: "duration" },
-        { text: "Fecha", value: "time" }
+        { text: "Tiempo (Minutos)", value: "duration"},
+        { text: "Fecha", value: "time" },
+        { text: "Accion", value: "action" }
       ],
-      studentsName: [
-
-        {
-          text: "Nombre",
-          align: "start",
-          sortable: true,
-          value: "name"
-        },
-        { text: "Apellido", value: "lastname" }
-      ]
+      
 
      }),
     computed: {

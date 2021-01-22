@@ -33,12 +33,6 @@
   import { getPastWeek } from "../utils/dateutils";
   import { getLogsByComponentAndStudent } from "../utils/dataLoader";
 
-=======
-  import CurveChart from "../components/CurveChart";
-  import TableDetails from "../components/TableDetails";
-  import { getLogsByComponentAndStudent } from "../utils/dataLoader";
-  import { getPastWeek } from "../utils/dateutils";
-
   export default {
     name: "Detail",
     components: {

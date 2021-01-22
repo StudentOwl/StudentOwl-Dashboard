@@ -1,12 +1,15 @@
 <template>
     <v-data-table
       :headers="headers"
-      :items="detailsData"
+      :items="details"
       :items-per-page="3"
       class="elevation-1"
-      :loading="true"
+      :loading="false"
       loading-text="Loading... Please wait"
-    ></v-data-table>
+    >
+    
+    </v-data-table>
+    
   </template>
   
   <script>
@@ -28,10 +31,10 @@
           text: "Aplicación",
           align: "start",
           sortable: true,
-          value: "aplicationName"
+          value: "applicationName"
         },
-        { text: "Tiempo", value: "time" },
-        { text: "Fecha", value: "date" }
+        { text: "Tiempo", value: "duration" },
+        { text: "Fecha", value: "time" }
       ],
       detailsData: []
     }),

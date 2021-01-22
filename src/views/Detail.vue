@@ -16,7 +16,6 @@
       <div class="d-flex justify-space-between mb-6">
         <!--Visualización de gráfico de curvas-->
         <curve-chart></curve-chart>
-
       </div>
       <div class="d-flex justify-space-between mb-6">
         <!--Visualización de gráfico de curvas-->
@@ -32,12 +31,6 @@
   import TableDetails from "../components/TableDetails";
   import { getPastWeek } from "../utils/dateutils";
   import { getLogsByComponentAndStudent } from "../utils/dataLoader";
-
-=======
-  import CurveChart from "../components/CurveChart";
-  import TableDetails from "../components/TableDetails";
-  import { getLogsByComponentAndStudent } from "../utils/dataLoader";
-  import { getPastWeek } from "../utils/dateutils";
 
   export default {
     name: "Detail",
@@ -78,33 +71,4 @@
     }
   }
 }
-      CurveChart
-    },
-    props: {
-      student: {
-        type: String,
-        required: true
-      }
-    },
-    data: () => ({
-      detailsData: [],
-      pingResul: "",
-      dates: [
-        getPastWeek(new Date())
-          .toISOString()
-          .substr(0, 10),
-        new Date().toISOString().substr(0, 10)
-      ]
-    }),
-    async created() {
-      this.loadDetailsData();
-    },
-    methods: {
-      loadDetailsData: async function () {
-        const resultado = await getLogsByComponentAndStudent(this.componentId, this.student, this.dates);
-        // this.pingResul = resultado.data;
-        this.detailsData = resultado.data.data;
-      }
-    }
-  }
 </script>

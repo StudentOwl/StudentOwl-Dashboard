@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    CurveChart
+    Circle chart
     <line-chart v-if="loaded" :chart-data="datacollection" :height="450"></line-chart>
   </div>
 </template>

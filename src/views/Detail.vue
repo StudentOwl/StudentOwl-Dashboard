@@ -2,7 +2,7 @@
   <div class="detail">
     <section class="pa-6">
       <!--Nombre del Estudiante-->
-      <h2 class="text-h2">{{ this.student }}</h2>
+      <h2 class="text-h2">Juan Gahona</h2>
       <!--Visualización de la tabla de detalles-->
       <table-details :details="detailsData"></table-details>
      

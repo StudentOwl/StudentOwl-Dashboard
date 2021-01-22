@@ -2,7 +2,7 @@
   <div class="detail">
     <section class="pa-6">
       <!--Nombre del Estudiante-->
-      <h2 class="text-h2">Andrés Fernando Jiménez López</h2>
+      <h2 class="text-h2">{{ this.student }}</h2>
       <!--Visualización de la tabla de detalles-->
       <table-details :details="detailsData"></table-details>
      
@@ -19,7 +19,8 @@
       </div>
       <div class="d-flex justify-space-between mb-6">
         <!--Visualización de gráfico de curvas-->
-        <chart-details :detailsCharts="detailsChart"></chart-details>
+        
+        <code v-if="namesData">{{ namesData.name }}</code>
       </div>
     </section>
   </div>
@@ -31,7 +32,8 @@
   import CurveChart from "../components/CurveChart";
   import TableDetails from "../components/TableDetails";
   import { getPastWeek } from "../utils/dateutils";
-  import { getLogsByComponentAndStudent} from "../utils/dataLoader";
+
+  import { getLogsByComponentAndStudent, getNamesbyStudent} from "../utils/dataLoader";
 
   export default {
     name: "Detail",
@@ -48,6 +50,7 @@
     },
     data: () => ({
       detailsData: [],
+      namesData: [],
       pingResul: "",
       dates: [
         getPastWeek(new Date())
@@ -59,7 +62,7 @@
     }),
     async created() {
       this.loadDetailsData();
-     
+      this.loadNameStudent();
     },
     methods: {
     loadDetailsData: async function() {
@@ -68,7 +71,11 @@
       this.detailsData = resultado.data.data;
     },
 
-    
+    loadNameStudent: async function() {
+      const resultado = await getNamesbyStudent(this.student);
+      // this.pingResul = resultado.data;
+      this.namesData = resultado.data.data;
+    },
     
     onDatesUpdate(newDates) {
       this.dates = newDates;

@@ -1,12 +1,12 @@
 <template>
-  <div class="container">
-    Circle chart
+  <v-card elevation="2">
+    <h2 class="text-h2">Circle chart</h2>
     <line-chart
       v-if="loaded"
       :chart-data="datacollection"
       :height="450"
     ></line-chart>
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -58,7 +58,14 @@ export default {
         datasets: [
           {
             label: this.keys,
-            // backgroundColor: "#5eba2a",
+            backgroundColor: [
+              "#385f71",
+              "#2b4162",
+              "#385f71",
+              "#f5f0f6",
+              "#d7b377",
+              "#8f754f"
+            ],
             data: this.values
           }
         ]

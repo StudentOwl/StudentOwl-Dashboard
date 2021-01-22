@@ -8,9 +8,8 @@
 export default {
   name: "CircularChart",
   props: {},
-  data: () => ({}),
+  data: () => ({})
 };
 </script>
 
-<style>
-</style>
+<style></style>

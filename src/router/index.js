@@ -14,7 +14,7 @@ const routes = [
   {
     path: "/detail/:student",
     name: "Detail",
-    component: require('../views/Detail.vue').default
+    component: require("../views/Detail.vue").default
   },
   {
     path: "/about",

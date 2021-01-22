@@ -20,40 +20,39 @@
 </template>
 
 <script>
+import CurveChart from "../components/CurveChart";
+import TableDetails from "../components/TableDetails";
 
-  import CurveChart from "../components/CurveChart";
-  import TableDetails from "../components/TableDetails";
-
-
-  export default {
-    name: "Detail",
-    components: {
-      TableDetails,
-      CurveChart
-    },
-    data: () => ({
-      detailsData: [
-        {
-          aplicationName: "Google Chrome",
-          time: "5 min, 20 s",
-          date: "20/may/2020"
-        },
-        {
-          aplicationName: "Microsoft Word",
-          time: "15 min, 55 s",
-          date: "30/ene/2020"
-        },
-        {
-          aplicationName: "Enterprise",
-          time: "30 min, 00 s",
-          date: "02/abr/2020"
-        }
-      ],
-      estudents: [
-        {
-          name: "Andrés Fernando Jiménez Lopez", code: "user"
-        }
-      ]
-    })
-  }
+export default {
+  name: "Detail",
+  components: {
+    TableDetails,
+    CurveChart
+  },
+  data: () => ({
+    detailsData: [
+      {
+        aplicationName: "Google Chrome",
+        time: "5 min, 20 s",
+        date: "20/may/2020"
+      },
+      {
+        aplicationName: "Microsoft Word",
+        time: "15 min, 55 s",
+        date: "30/ene/2020"
+      },
+      {
+        aplicationName: "Enterprise",
+        time: "30 min, 00 s",
+        date: "02/abr/2020"
+      }
+    ],
+    estudents: [
+      {
+        name: "Andrés Fernando Jiménez Lopez",
+        code: "user"
+      }
+    ]
+  })
+};
 </script>

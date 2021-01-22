@@ -15,16 +15,11 @@
       <!-- GRAFICOS GENERALES en componente -->
       <div class="d-flex justify-space-between mb-6">
         <circular-chart
-          :conponentId="componentId"
+          :componentId="componentId"
           :dates="dates"
         ></circular-chart>
-        <curve-chart :conponentId="componentId" :dates="dates"></curve-chart>
+        <curve-chart :componentId="componentId" :dates="dates"></curve-chart>
       </div>
-    </section>
-
-    <section class="pa-6">
-      <code v-if="dates">{{ dates }}</code>
-      <code v-if="logsData">{{ logsData }}</code>
     </section>
   </div>
 </template>
@@ -66,6 +61,7 @@ export default {
   async created() {
     this.loadStudentData();
     this.loadLogsData();
+    
   },
   methods: {
     loadStudentData: async function() {
@@ -77,6 +73,8 @@ export default {
       const resultado = await getLogsByComponent(this.componentId, this.dates);
       this.logsData = resultado.data.data;
     },
+
+
     onDatesUpdate(newDates) {
       this.dates = newDates;
     }

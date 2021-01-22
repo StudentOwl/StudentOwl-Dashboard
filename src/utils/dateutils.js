@@ -1,9 +1,9 @@
 export function getPastWeek(fechaActual) {
-    var lastWeek = new Date();
-    lastWeek.setDate(fechaActual.getDate() - 14);
-    return lastWeek;
-  }
-  
+  var lastWeek = new Date();
+  lastWeek.setDate(fechaActual.getDate() - 7);
+  return lastWeek;
+}
+
 export function convertDateToMiliseconds(date) {
     var tokens = date.split("-");
     var year = parseInt(tokens[0]);

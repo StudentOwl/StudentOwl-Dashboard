@@ -6,7 +6,7 @@
       <!--Visualización de la tabla de detalles-->
       <table-details :details="detailsData"></table-details>
      
-      <code v-if="detailsData">{{ detailsData }}</code>
+
     </section>
 
     <section class="pa-6">
@@ -30,7 +30,7 @@
   import CurveChart from "../components/CurveChart";
   import TableDetails from "../components/TableDetails";
   import { getPastWeek } from "../utils/dateutils";
-  import { getLogsByComponentAndStudent } from "../utils/dataLoader";
+  import { getLogsByComponentAndStudent} from "../utils/dataLoader";
 
   export default {
     name: "Detail",
@@ -40,7 +40,7 @@
 
     },
     props: {
-      componentId: {
+      student: {
         type: String,
         required: true
       }
@@ -58,13 +58,16 @@
     }),
     async created() {
       this.loadDetailsData();
+     
     },
     methods: {
     loadDetailsData: async function() {
-      const resultado = await getLogsByComponentAndStudent(this.componentId, this.studentId, this.dates);
+      const resultado = await getLogsByComponentAndStudent(this.componentId, this.student, this.dates);
       // this.pingResul = resultado.data;
       this.detailsData = resultado.data.data;
     },
+
+    
     
     onDatesUpdate(newDates) {
       this.dates = newDates;

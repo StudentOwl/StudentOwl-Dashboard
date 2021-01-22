@@ -1,9 +1,19 @@
 <template>
-  <v-data-table :headers="headers" :items="details" :items-per-page="3" class="elevation-1" :loading="false"
-    loading-text="Loading... Please wait"></v-data-table>
-</template>
 
-<script>
+    <v-data-table
+      :headers="headers"
+      :items="details"
+      :items-per-page="3"
+      class="elevation-1"
+      :loading="false"
+      loading-text="Loading... Please wait"
+    >
+    
+    </v-data-table>
+    
+  </template>
+  
+  <script>
   export default {
     name: "TableDetails",
     props: {
@@ -41,8 +51,14 @@
      }),
     computed: {
     }
+  };
+  </script>
+  
+  <style></style>
+
 
   };
 </script>
 
 <style></style>
+

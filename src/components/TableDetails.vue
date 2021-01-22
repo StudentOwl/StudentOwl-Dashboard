@@ -49,15 +49,6 @@
   
   <style></style>
 
-  <v-data-table
-    :headers="headers"
-    :items="details"
-    :items-per-page="3"
-    class="elevation-1"
-    :loading="false"
-    loading-text="Loading... Please wait"
-  ></v-data-table>
-</template>
 
 <script>
 export default {

@@ -15,7 +15,6 @@ const routes = [
     name: "Detail",
     props: true,
     component: require("../views/Detail.vue").default
-
   },
   {
     path: "/about",

@@ -1,6 +1,6 @@
 export function getPastWeek(fechaActual) {
   var lastWeek = new Date();
-  lastWeek.setDate(fechaActual.getDate() - 14);
+  lastWeek.setDate(fechaActual.getDate() - 7);
   return lastWeek;
 }
 

@@ -11,7 +11,7 @@
 
 <script>
 import { getDataToolbyDate } from "../utils/dataLoader";
-import LineChart from "./DoughnutChart.js";
+import LineChart from "./DoughnutChart.vue";
 export default {
   name: "CircularChart",
   components: {

@@ -1,4 +1,3 @@
-import { Line } from 'vue-chartjs'
 <template>
   <div class="small">
     <line-chart :chart-data="datacollection" :height="100"></line-chart>
@@ -58,8 +57,8 @@ export default {
 
 <style lang="css">
 .small {
-  max-width: 900px;
+  max-width: 300px;
   /* max-height: 500px; */
-  margin: 50px auto;
+  margin: 25px auto;
 }
 </style>

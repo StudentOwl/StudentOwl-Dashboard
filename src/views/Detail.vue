@@ -25,9 +25,9 @@
 </template>
 
 <script>
-import CurveChart from "../components/CurveChart";
-import TableDetails from "../components/TableDetails";
-import { getPastWeek } from "../utils/dateutils";
+import CurveChart from "../components/CurveChart.vue";
+import TableDetails from "../components/TableDetails.vue";
+import { getPastWeek } from "../utils/dateutils.js";
 
 import {
   getLogsByComponentAndStudent,

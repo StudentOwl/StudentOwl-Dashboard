@@ -10,20 +10,24 @@
 
       <v-divider></v-divider>
 
-      <v-list dense nav>
+      <v-list nav>
         <v-list-item v-for="component in components" :key="component.code" link>
           <!-- <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon> -->
 
           <v-list-item-content>
-            <v-list-item-title>{{ component.name }}</v-list-item-title>
+            <v-list-item-title
+              ><v-btn text :to="`/dashboard/${component.code}`">{{
+                component.name
+              }}</v-btn>
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="primary" dark height="100">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <div class="d-flex align-center">
         <v-img
@@ -32,7 +36,7 @@
           contain
           src="./assets/StudentOwlLogoRight-White.png"
           transition="scale-transition"
-          width="190"
+          width="250"
         />
         <v-toolbar-title>Dashboard</v-toolbar-title>
       </div>
@@ -47,7 +51,13 @@
         <v-icon>mdi-information-outline</v-icon>
         <span class="ml-2">Acerca de</span>
       </v-btn>
-      <v-btn text>
+      <v-btn
+        text
+        v-if="authenticated"
+        to="/login"
+        @click.native="logout"
+        replace=""
+      >
         <v-icon>mdi-logout</v-icon>
         <span class="ml-2">Logout</span>
       </v-btn>
@@ -72,8 +82,27 @@ export default {
     components: [
       { name: "Gestion de proyectos", code: "GTPR01" },
       { name: "Ingenieria de requisitos", code: "IGRT01" },
-      { name: "GP", code: "GSPR01" }
-    ]
-  })
+      { name: "Gestion Productiva", code: "GSPR01" },
+    ],
+    authenticated: false,
+    studentOwlAccount: {
+      username: "mpabad",
+      password: "12345",
+    },
+    mounted() {
+      if (!this.authenticated) {
+        this.$router.replace({ name: "Login" });
+      }
+    },
+    methods: {
+      setAuthenticated: function (status) {
+        console.log(status);
+        this.authenticated = status;
+      },
+      logout: function () {
+        this.authenticated = false;
+      },
+    },
+  }),
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-<<<<<<< Updated upstream
+
     <v-data-table
       :headers="headers"
       :items="details"
@@ -48,7 +48,7 @@
   </script>
   
   <style></style>
-=======
+
   <v-data-table
     :headers="headers"
     :items="details"
@@ -91,4 +91,4 @@ export default {
 </script>
 
 <style></style>
->>>>>>> Stashed changes
+

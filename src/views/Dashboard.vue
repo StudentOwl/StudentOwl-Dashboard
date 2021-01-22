@@ -21,11 +21,6 @@
         <curve-chart :componentId="componentId" :dates="dates"></curve-chart>
       </div>
     </section>
-
-    <section class="pa-6">
-      <code v-if="dates">{{ dates }}</code>
-      <code v-if="logsData">{{ logsData }}</code>
-    </section>
   </div>
 </template>
 

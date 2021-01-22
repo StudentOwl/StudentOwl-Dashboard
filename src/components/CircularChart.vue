@@ -1,21 +1,19 @@
 <template>
-  <v-card class="pa-2">
-    CircularChart
-  
-  <div>
-   {{componentId}}
-  <p>{{chartdata}}---------------588</p>
+  <div class="container">
+    CurveChart
+    <line-chart v-if="loaded" :chart-data="datacollection" :height="450"></line-chart>
   </div>
-  </v-card>
 </template>
+
 
 <script>
 import {getDataToolbyDate } from "../utils/dataLoader";
-//import ChartDoughnutBase from './DoughnutChart.vue'
+import LineChart from './DoughnutChart.js'
 export default {
+
   name: "CircularChart",
-  components:{
-    //ChartDoughnutBase
+  components: {
+    LineChart
   },
   props: {
   componentId:{
@@ -25,38 +23,53 @@ export default {
   dates:{
     type:Array,
     required:true,
-    
   }
 
   },
   data: () => ({
-loaded: false,
-    chartdata: null
-
+    
+    loaded: false,
+    chartdata: null,
+    keys: [],
+    values: [],
+    return: {datacollection: null}
   }),
 
     async mounted () {
     this.loaded = false
     try {
-        const resultado = await getDataToolbyDate(this.componentId, this.dates);
-      this.chartdata = resultado.data;
 
+       const resultado = await getDataToolbyDate(this.componentId, this.dates);
+      this.chartdata = resultado.data;
+      for (var key in this.chartdata) {
+         this.keys.push(key)
+         this.values.push(this.chartdata[key])           
+}
+
+    
+    
       this.loaded = true
     } catch (e) {
       console.error(e,"No se ejectuto bien el mountd")
-    }
-  }
-  /* async created() {
- 
-    this.loadDataTools();
+    }this.fillData()
   },
-  methods: {
-   
-    loadDataTools:async function(){
- const resultado = await getDataToolbyDate(this.componentId, this.dates);
-      this.logsData = resultado.data.data;
-    },
-  }*/
+   methods: {
+
+    fillData ()
+    {
+      this.datacollection = {
+        labels: this.keys,
+        datasets: [
+          {
+            label: this.keys,
+            backgroundColor: '#5eba2a',
+            data: this.values
+          },
+        ]
+      }
+    }
+   }
+ 
 };
 </script>
 

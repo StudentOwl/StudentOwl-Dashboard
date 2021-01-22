@@ -27,6 +27,7 @@
 
 <script>
 
+
   import CurveChart from "../components/CurveChart";
   import TableDetails from "../components/TableDetails";
   import { getPastWeek } from "../utils/dateutils";

@@ -33,7 +33,7 @@
             ></v-col>
             <v-col sm="12" class="px-16">
               <v-btn color="secondary" outlined block @click="login()"
-                >Sing In</v-btn
+                >Iniciar</v-btn
               >
             </v-col>
           </v-col>

@@ -8,6 +8,12 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
+    redirect: {
+      name: "Login"
+    }
+  },
+  {
+    path: "/login",
     name: "Login",
     component: Login
   },
@@ -20,7 +26,7 @@ const routes = [
   {
     path: "/detail/:student",
     name: "Detail",
-    component: require("../views/Detail.vue").default
+    component: require("../views/Detail.vue")
   },
   {
     path: "/about",

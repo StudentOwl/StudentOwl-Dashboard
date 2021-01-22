@@ -15,7 +15,7 @@
 
           <v-col sm="12" class="px-16 py-8">
             <v-col sm="12"
-              ><h1 class="text-h4 text-center">Inicion de sesion</h1></v-col
+              ><h1 class="text-h4 text-center">Inicio de sesion</h1></v-col
             >
             <v-col sm="12" class="mb-n6"
               ><v-text-field
@@ -32,7 +32,9 @@
               ></v-text-field
             ></v-col>
             <v-col sm="12" class="px-16">
-              <v-btn color="secondary" outlined block :click="login()">Sing In</v-btn>
+              <v-btn color="secondary" outlined block @click="login()"
+                >Sing In</v-btn
+              >
             </v-col>
           </v-col>
         </v-row>
@@ -44,7 +46,6 @@
 <script>
 export default {
   name: "Login",
-  props: {},
   data: () => ({
     input: {
       username: "",
@@ -52,13 +53,13 @@ export default {
     },
   }),
   methods: {
-    login() {
+    login: function () {
       if (this.input.username != "" && this.input.password != "") {
         if (
-          this.input.username == this.$parent.mockAccount.username &&
-          this.input.password == this.$parent.mockAccount.password
+          this.input.username == this.$parent.studentOwlAccount.username &&
+          this.input.password == this.$parent.studentOwlAccount.password
         ) {
-          this.$emit("authenticated", true);
+          this.$emit("onAuthenticated", true);
           this.$router.replace({ name: "Dashboard" });
         } else {
           console.log("El usuario y contrasenia son incorrectos");

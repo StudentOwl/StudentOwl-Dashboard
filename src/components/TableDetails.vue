@@ -13,7 +13,7 @@
     
   </template>
   
-  <script>
+<script>
   export default {
     name: "TableDetails",
     props: {
@@ -53,12 +53,6 @@
     }
   };
   </script>
-  
-  <style></style>
-
-
   };
-</script>
-
 <style></style>
 

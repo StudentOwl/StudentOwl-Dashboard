@@ -51,9 +51,7 @@ export default {
     studentsData: [],
     pingResul: "",
     dates: [
-      getPastWeek(new Date())
-        .toISOString()
-        .substr(0, 10),
+      getPastWeek(new Date()).toISOString().substr(0, 10),
       new Date().toISOString().substr(0, 10),
     ],
     logsData: [],
@@ -63,12 +61,12 @@ export default {
     this.loadLogsData();
   },
   methods: {
-    loadStudentData: async function() {
+    loadStudentData: async function () {
       const resultado = await getStudentByComponent(this.componentId);
       // this.pingResul = resultado.data;
       this.studentsData = resultado.data.data;
     },
-    loadLogsData: async function() {
+    loadLogsData: async function () {
       const resultado = await getLogsByComponent(this.componentId, this.dates);
       this.logsData = resultado.data.data;
     },

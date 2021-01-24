@@ -31,20 +31,20 @@ import { getPastWeek } from "../utils/dateutils.js";
 
 import {
   getLogsByComponentAndStudent,
-  getNamesbyStudent
+  getNamesbyStudent,
 } from "../utils/dataLoader";
 
 export default {
   name: "Detail",
   components: {
     TableDetails,
-    CurveChart
+    CurveChart,
   },
   props: {
     student: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data: () => ({
     detailsData: [],
@@ -54,8 +54,8 @@ export default {
       getPastWeek(new Date())
         .toISOString()
         .substr(0, 10),
-      new Date().toISOString().substr(0, 10)
-    ]
+      new Date().toISOString().substr(0, 10),
+    ],
   }),
   async created() {
     this.loadDetailsData();
@@ -80,7 +80,7 @@ export default {
 
     onDatesUpdate(newDates) {
       this.dates = newDates;
-    }
-  }
+    },
+  },
 };
 </script>

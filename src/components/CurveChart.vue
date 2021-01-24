@@ -8,7 +8,7 @@
 export default {
   name: "CurveChart",
   props: {},
-  data: () => ({})
+  data: () => ({}),
 };
 </script>
 

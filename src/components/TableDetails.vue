@@ -16,12 +16,12 @@ export default {
   props: {
     details: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     isLoading: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   data: () => ({
     headers: [
@@ -29,14 +29,14 @@ export default {
         text: "Aplicación",
         align: "start",
         sortable: true,
-        value: "applicationName"
+        value: "applicationName",
       },
       { text: "Tiempo (Minutos)", value: "duration" },
       { text: "Fecha", value: "time" },
-      { text: "Accion", value: "action" }
-    ]
+      { text: "Accion", value: "action" },
+    ],
   }),
-  computed: {}
+  computed: {},
 };
 </script>
 };

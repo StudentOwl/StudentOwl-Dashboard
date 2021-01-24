@@ -15,24 +15,24 @@ import LineChart from "./DoughnutChart.vue";
 export default {
   name: "CircularChart",
   components: {
-    LineChart
+    LineChart,
   },
   props: {
     componentId: {
       type: String,
-      required: true
+      required: true,
     },
     dates: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   data: () => ({
     loaded: false,
     chartdata: null,
     keys: [],
     values: [],
-    return: { datacollection: null }
+    return: { datacollection: null },
   }),
 
   async mounted() {
@@ -64,14 +64,14 @@ export default {
               "#385f71",
               "#f5f0f6",
               "#d7b377",
-              "#8f754f"
+              "#8f754f",
             ],
-            data: this.values
-          }
-        ]
+            data: this.values,
+          },
+        ],
       };
-    }
-  }
+    },
+  },
 };
 </script>
 

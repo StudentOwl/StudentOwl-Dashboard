@@ -9,25 +9,25 @@ const routes = [
   {
     path: "/",
     redirect: {
-      name: "Login"
-    }
+      name: "Login",
+    },
   },
   {
     path: "/login",
     name: "Login",
-    component: Login
+    component: Login,
   },
   {
     path: "/dashboard/:componentId",
     name: "Dashboard",
     props: true,
-    component: Dashboard
+    component: Dashboard,
   },
   {
     path: "/dashboard/detail/:student",
     name: "Detail",
     props: true,
-    component: require("../views/Detail.vue").default
+    component: require("../views/Detail.vue").default,
   },
   {
     path: "/about",
@@ -36,14 +36,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
+      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 export default router;

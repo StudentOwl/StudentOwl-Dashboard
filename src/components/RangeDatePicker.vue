@@ -44,21 +44,21 @@ export default {
       getPastWeek(new Date())
         .toISOString()
         .substr(0, 10),
-      new Date().toISOString().substr(0, 10)
+      new Date().toISOString().substr(0, 10),
     ],
-    menu: false
+    menu: false,
   }),
   computed: {
     dateRangeText() {
       return "De " + this.dates.join(" a ");
-    }
+    },
   },
   methods: {
     saveRange() {
       this.$refs.menu.save(this.dates);
       this.$emit("changeRange", this.dates);
-    }
-  }
+    },
+  },
 };
 </script>
 

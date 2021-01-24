@@ -7,23 +7,23 @@ export default {
     keys: {
       type: Array,
       default: null,
-      require: true
+      require: true,
     },
     values: {
       type: Array,
       default: null,
-      require: true
-    }
+      require: true,
+    },
   },
   mounted() {
     this.renderChart({
       labels: this.keys,
       datasets: [
         {
-          data: this.values
-        }
-      ]
+          data: this.values,
+        },
+      ],
     });
-  }
+  },
 };
 </script>

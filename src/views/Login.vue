@@ -49,8 +49,8 @@ export default {
   data: () => ({
     input: {
       username: "",
-      password: ""
-    }
+      password: "",
+    },
   }),
   methods: {
     login: function() {
@@ -67,8 +67,8 @@ export default {
       } else {
         console.log("Es necesario llenar los campos");
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

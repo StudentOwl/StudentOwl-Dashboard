@@ -15,13 +15,13 @@ export default {
   props: {
     detailsCharts: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   data() {
     return {
       materias: null,
-      tiempo: null
+      tiempo: null,
     };
   },
   mounted() {
@@ -36,22 +36,22 @@ export default {
         .get(
           "https://api-studentowl.herokuapp.com/api/v1.0/logs/all?component=AAAA00"
         )
-        .then(response => {
+        .then((response) => {
           this.materias = response.data;
         })
-        .catch(e => console.log(e));
+        .catch((e) => console.log(e));
     },
     getTiempo() {
       axios
         .get(
           "https://api-studentowl.herokuapp.com/api/v1.0/logs/all?msStart=1234567890123"
         )
-        .then(response => {
+        .then((response) => {
           this.tiempo = response.data;
         })
-        .catch(e => console.log(e));
-    }
-  }
+        .catch((e) => console.log(e));
+    },
+  },
 };
 </script>
 

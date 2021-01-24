@@ -39,13 +39,13 @@ export default {
     TableStudents,
     CircularChart,
     CurveChart,
-    RangeDatePicker
+    RangeDatePicker,
   },
   props: {
     componentId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data: () => ({
     studentsData: [],
@@ -54,9 +54,9 @@ export default {
       getPastWeek(new Date())
         .toISOString()
         .substr(0, 10),
-      new Date().toISOString().substr(0, 10)
+      new Date().toISOString().substr(0, 10),
     ],
-    logsData: []
+    logsData: [],
   }),
   async created() {
     this.loadStudentData();
@@ -75,7 +75,7 @@ export default {
 
     onDatesUpdate(newDates) {
       this.dates = newDates;
-    }
-  }
+    },
+  },
 };
 </script>

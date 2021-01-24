@@ -21,12 +21,12 @@ export default {
   props: {
     students: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     isLoading: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data: () => ({
     headers: [
@@ -34,14 +34,14 @@ export default {
         text: "ID",
         align: "start",
         sortable: true,
-        value: "username"
+        value: "username",
       },
       { text: "Name", value: "name" },
       { text: "Lastname", value: "lastname" },
-      { text: "Detail", value: "actions", sortable: false }
-    ]
+      { text: "Detail", value: "actions", sortable: false },
+    ],
   }),
-  computed: {}
+  computed: {},
 };
 </script>
 

@@ -82,12 +82,12 @@ export default {
     components: [
       { name: "Gestion de proyectos", code: "GTPR01" },
       { name: "Ingenieria de requisitos", code: "IGRT01" },
-      { name: "Gestion Productiva", code: "GSPR01" },
+      { name: "Gestion Productiva", code: "GSPR01" }
     ],
     authenticated: false,
     studentOwlAccount: {
       username: "mpabad",
-      password: "12345",
+      password: "12345"
     },
     mounted() {
       if (!this.authenticated) {
@@ -95,14 +95,14 @@ export default {
       }
     },
     methods: {
-      setAuthenticated: function (status) {
+      setAuthenticated: function(status) {
         console.log(status);
         this.authenticated = status;
       },
-      logout: function () {
+      logout: function() {
         this.authenticated = false;
-      },
-    },
-  }),
+      }
+    }
+  })
 };
 </script>

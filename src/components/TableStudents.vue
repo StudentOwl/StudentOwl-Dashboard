@@ -3,9 +3,12 @@
     :headers="headers"
     :items="students"
     :items-per-page="5"
+    :loading=isLoading
+    item-key="username"
+    group-by="lastTime"
     class="elevation-1"
-    :loading="false"
-    loading-text="Loading... Please wait"
+    loading-text="Cargando..."
+    show-group-by
   >
     <template v-slot:item.actions="{ item }"
       ><v-btn icon color="secodary" :to="`detail/${item.username}`"
@@ -30,15 +33,10 @@ export default {
   },
   data: () => ({
     headers: [
-      {
-        text: "ID",
-        align: "start",
-        sortable: true,
-        value: "username",
-      },
-      { text: "Name", value: "name" },
-      { text: "Lastname", value: "lastname" },
-      { text: "Detail", value: "actions", sortable: false },
+      { text: "Estudiante", value: "name" },
+      { text: "Accion", value: "lastAction", sortable: false },
+      { text: "Hora", value: "lastTime", sortable: true },
+      { text: "Detalle", value: "actions", sortable: false }
     ],
   }),
   computed: {},

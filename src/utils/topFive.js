@@ -71,12 +71,24 @@ for(let i=0; i < arrName.length;i++){
     arrTools.push(objecto);
 }
 //------------------------------------//
+
+let sorted = arrTools.sort(function(a, b) {
+    if(a.duration > b.duration) { return -1 };
+    if(a.duration < b.duration) { return 1 };
+
+    return 0;
+});
+const topfiveArray=sorted.splice(0, 5);
+console.table(sorted.splice(0, 5));
+
+///------------------------------//
+console.log("")
 console.log(newArr)
 console.log("Este11111",arrName)
 console.log("Total de tiempo",num)
 console.log("Herramientas en array",arrTools)
-
-    return repetidos;
+console.log("Top 5",topfiveArray)
+    return topfiveArray;
 }
 
 /*function secondsToString(seconds) {

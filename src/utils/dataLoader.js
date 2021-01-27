@@ -106,6 +106,22 @@ export async function getDataToolbyDate(componentId, dates) {
   }
 }
 
-export async function getLastActivities(logsData, studentData) {
-  console.log(studentData)
+export function getLastActivities(logsData, studentData) {
+  var dataClean = studentData.map(student => {
+    var newStudent = { username: student.username, name: `${student.lastname} ${student.name}` }
+    return newStudent;
+  });
+
+  dataClean.forEach(student => {
+    const findedLog = logsData.find(log => log.student === student.username)
+    
+    if (findedLog) {
+      student["lastAction"] = findedLog.action;
+      student["lastTime"] = new Date(findedLog.time);
+    } else {
+      student["lastAction"] = "Vacio";
+      student["lastTime"] = "vacio";
+    }
+  });
+  return dataClean;
 }

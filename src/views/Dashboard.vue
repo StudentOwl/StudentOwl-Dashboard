@@ -3,7 +3,7 @@
     <section class="pa-6">
       <h2 class="text-h2">Estudiantes</h2>
       <!-- TABLA principal en componente -->
-      <table-students ></table-students>
+      <table-students :students="mainTableData" :isLoading="isLoadingMainTableData" ></table-students>
     </section>
 
     <section class="pa-6">
@@ -55,6 +55,8 @@ export default {
       new Date().toISOString().substr(0, 10),
     ],
     logsData: [],
+    mainTableData: [],
+    isLoadingMainTableData: true,
   }),
   async created() {
     this.loadAllDataFromAPI();
@@ -66,9 +68,12 @@ export default {
 
       this.studentsData = resEstudents.data.data;
       this.logsData = resLogs.data.data;
+
+      this.processData()
     },
-    processData: async function() {
-      getLastActivities({}, this.studentsData);
+    processData: function() {
+      this.mainTableData = getLastActivities(this.logsData, this.studentsData);
+      this.isLoadingMainTableData = false;
     },
     onDatesUpdate(newDates) {
       this.dates = newDates;

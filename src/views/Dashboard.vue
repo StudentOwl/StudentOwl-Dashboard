@@ -3,7 +3,7 @@
     <section class="pa-6">
       <h2 class="text-h2">Estudiantes</h2>
       <!-- TABLA principal en componente -->
-      <table-students :students="studentsData"></table-students>
+      <table-students ></table-students>
     </section>
 
     <section class="pa-6">
@@ -31,7 +31,7 @@ import CurveChart from "../components/CurveChart.vue";
 import RangeDatePicker from "../components/RangeDatePicker.vue";
 import TableStudents from "../components/TableStudents.vue";
 
-import { getStudentByComponent, getLogsByComponent } from "../utils/dataLoader";
+import { getStudentByComponent, getLogsByComponent, getLastActivities } from "../utils/dataLoader";
 import { getPastWeek } from "../utils/dateutils";
 export default {
   name: "Home",
@@ -57,20 +57,19 @@ export default {
     logsData: [],
   }),
   async created() {
-    this.loadStudentData();
-    this.loadLogsData();
+    this.loadAllDataFromAPI();
   },
   methods: {
-    loadStudentData: async function () {
-      const resultado = await getStudentByComponent(this.componentId);
-      // this.pingResul = resultado.data;
-      this.studentsData = resultado.data.data;
-    },
-    loadLogsData: async function () {
-      const resultado = await getLogsByComponent(this.componentId, this.dates);
-      this.logsData = resultado.data.data;
-    },
+    loadAllDataFromAPI: async function(){
+      const resEstudents = await getStudentByComponent(this.componentId);
+      const resLogs = await getLogsByComponent(this.componentId, this.dates);
 
+      this.studentsData = resEstudents.data.data;
+      this.logsData = resLogs.data.data;
+    },
+    processData: async function() {
+      getLastActivities({}, this.studentsData);
+    },
     onDatesUpdate(newDates) {
       this.dates = newDates;
     },

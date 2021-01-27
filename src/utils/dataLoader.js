@@ -105,3 +105,7 @@ export async function getDataToolbyDate(componentId, dates) {
     console.log(err);
   }
 }
+
+export async function getLastActivities(logsData, studentData) {
+  console.log(studentData)
+}

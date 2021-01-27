@@ -21,6 +21,9 @@
         <curve-chart :componentId="componentId" :dates="dates"></curve-chart>
       </div>
     </section>
+
+ <!-- prueba -->
+  <p>hhhhh</p>  {{topFiveData}}
   </div>
 </template>
 
@@ -33,6 +36,7 @@ import TableStudents from "../components/TableStudents.vue";
 
 import { getStudentByComponent, getLogsByComponent } from "../utils/dataLoader";
 import { getPastWeek } from "../utils/dateutils";
+import{loadLogsTopFive}from "../utils/topFive"
 export default {
   name: "Home",
   components: {
@@ -55,10 +59,12 @@ export default {
       new Date().toISOString().substr(0, 10),
     ],
     logsData: [],
+     topFiveData: [],
   }),
   async created() {
     this.loadStudentData();
     this.loadLogsData();
+    this.loadDataForTopFive();
   },
   methods: {
     loadStudentData: async function () {
@@ -69,6 +75,12 @@ export default {
     loadLogsData: async function () {
       const resultado = await getLogsByComponent(this.componentId, this.dates);
       this.logsData = resultado.data.data;
+    },
+loadDataForTopFive:async function () {
+      const resultado = await loadLogsTopFive(this.componentId, this.dates);
+      this.topFiveData = resultado;
+      console.log("dash",this.topFiveData)
+      
     },
 
     onDatesUpdate(newDates) {

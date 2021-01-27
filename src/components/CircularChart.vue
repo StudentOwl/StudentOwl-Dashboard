@@ -1,16 +1,16 @@
 <template>
-  <v-card elevation="2">
-    <h2 class="text-h2">Circle chart</h2>
+  <v-card class="pa-2">
+  <p align="center">Top 5 de herramientas</p>
     <line-chart
       v-if="loaded"
       :chart-data="datacollection"
-      :height="450"
+      
     ></line-chart>
   </v-card>
 </template>
 
 <script>
-import { getDataToolbyDate } from "../utils/dataLoader";
+//import { getDataToolbyDate } from "../utils/dataLoader";
 import LineChart from "./DoughnutChart.vue";
 export default {
   name: "CircularChart",
@@ -26,6 +26,10 @@ export default {
       type: Array,
       required: true,
     },
+    topFiveData: {
+      type: Array,
+      required: true,
+    },
   },
   data: () => ({
     loaded: false,
@@ -33,18 +37,17 @@ export default {
     keys: [],
     values: [],
     return: { datacollection: null },
+    
   }),
-
-  async mounted() {
+//probando
+   mounted() {
     this.loaded = false;
+    if(this.topFiveData)
     try {
-      const resultado = await getDataToolbyDate(this.componentId, this.dates);
-      this.chartdata = resultado.data;
-      for (var key in this.chartdata) {
-        this.keys.push(key);
-        this.values.push(this.chartdata[key]);
-      }
-
+      this.topFiveData.forEach(element => {
+        this.keys.push(element.nameTools);
+        this.values.push(element.duration);
+      });
       this.loaded = true;
     } catch (e) {
       console.error(e, "No se ejectuto bien el mountd");
@@ -57,15 +60,22 @@ export default {
         labels: this.keys,
         datasets: [
           {
-            label: this.keys,
+            label: "Top 5",
             backgroundColor: [
-              "#385f71",
-              "#2b4162",
-              "#385f71",
-              "#f5f0f6",
-              "#d7b377",
-              "#8f754f",
+              "#4A148C",
+              "#6A1B9A",
+              "#7B1FA2",
+              "#8E24AA",
+              "#AB47BC",
             ],
+            hoverBackgroundColor:[
+              "#880E4F",
+              "#AD1457",
+              "#C2185B",
+              "#D81B60",
+              "#EC407A"
+            ],
+      
             data: this.values,
           },
         ],

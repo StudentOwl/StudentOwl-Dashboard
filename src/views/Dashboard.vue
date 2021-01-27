@@ -17,13 +17,15 @@
         <circular-chart
           :componentId="componentId"
           :dates="dates"
+          :topFiveData="topFiveData"
         ></circular-chart>
         <curve-chart :componentId="componentId" :dates="dates"></curve-chart>
       </div>
     </section>
 
  <!-- prueba -->
-  <p>hhhhh</p>  {{topFiveData}}
+
+ {{topFiveData}}
   </div>
 </template>
 

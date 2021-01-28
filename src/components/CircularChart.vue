@@ -33,7 +33,7 @@ export default {
   },
   data: () => ({
     loaded: false,
- //arre
+ //arreglos para recibir proper
     keys: [],
     values: [],
     return: { datacollection: null },

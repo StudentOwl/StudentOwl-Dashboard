@@ -15,6 +15,7 @@
       <!-- GRAFICOS GENERALES en componente -->
       <div class="d-flex justify-space-between mb-6">
         <circular-chart
+         v-if="loaded"
           :componentId="componentId"
           :dates="dates"
           :topFiveData="topFiveData"
@@ -23,7 +24,7 @@
       </div>
     </section>
 
- <!-- prueba -->
+
 
 
   </div>
@@ -55,6 +56,7 @@ export default {
   },
   data: () => ({
     studentsData: [],
+     loaded: false,
     pingResul: "",
     dates: [
       getPastWeek(new Date()).toISOString().substr(0, 10),
@@ -79,8 +81,10 @@ export default {
       this.logsData = resultado.data.data;
     },
 loadDataForTopFive:async function () {
+    this.loaded = false;
       const resultado = await loadLogsTopFive(this.componentId, this.dates);
       this.topFiveData = resultado;
+          this.loaded = true;
       console.log("dash",this.topFiveData)
       
     },

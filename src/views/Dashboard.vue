@@ -1,28 +1,40 @@
 <template>
   <div class="home">
-    <section class="pa-6">
+    <section class="mt-10">
       <h2 class="text-h2">Estudiantes</h2>
       <!-- TABLA principal en componente -->
       <table-students :students="mainTableData" :isLoading="isLoadingMainTableData" ></table-students>
     </section>
 
-    <section class="pa-6">
+    <v-divider></v-divider>
+    
+    <section class="mt-10">
       <h2 class="text-h2">Estadisticas</h2>
 
       <!-- Selector de fechas -->
       <range-date-picker @changeRange="onDatesUpdate" />
 
       <!-- GRAFICOS GENERALES en componente -->
-      <div class="d-flex justify-space-between mb-6">
-        <circular-chart
-         v-if="loaded"
-          :componentId="componentId"
-          :dates="dates"
-          :topFiveData="topFiveData"
-        ></circular-chart>
-        <curve-chart :componentId="componentId" :dates="dates"></curve-chart>
-        <curve-chart-pordias> </curve-chart-pordias>
-      </div>
+      <v-row>
+        <v-col cols="12" md="6">
+          <p class="text-h4">Aplicaciones</p>
+          <circular-chart
+          v-if="loaded"
+            :componentId="componentId"
+            :dates="dates"
+            :topFiveData="topFiveData"
+          ></circular-chart>
+        </v-col>
+        <v-col  cols="12" md="6">
+          <p class="text-h4">Tiempo de uso</p>
+          <v-row>
+            <v-col><per-days> </per-days></v-col>
+            <v-col><per-hours :componentId="componentId" :dates="dates"></per-hours></v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+      <!-- <div class="d-flex justify-space-between mb-6">
+      </div> -->
     </section>
   </div>
 </template>
@@ -30,10 +42,10 @@
 <script>
 // @ is an alias to /src
 import CircularChart from "../components/CircularChart.vue";
-import CurveChart from "../components/CurveChart.vue";
+import PerHours from "../components/PerHours.vue";
 import RangeDatePicker from "../components/RangeDatePicker.vue";
 import TableStudents from "../components/TableStudents.vue";
-import CurveChartPordias from "../components/CurveChartPordias.vue";
+import PerDays from "../components/PerDays.vue";
 
 import { getStudentByComponent, getLogsByComponent, getLastActivities } from "../utils/dataLoader";
 import { getPastWeek } from "../utils/dateutils";
@@ -44,10 +56,9 @@ export default {
   components: {
     TableStudents,
     CircularChart,
-    CurveChart,
+    PerHours,
     RangeDatePicker,
-    CurveChartPordias,
-   
+    PerDays,
   },
   props: {
     componentId: {
@@ -57,7 +68,7 @@ export default {
   },
   data: () => ({
     studentsData: [],
-     loaded: false,
+    loaded: false,
     pingResul: "",
     dates: [
       getPastWeek(new Date()).toISOString().substr(0, 10),

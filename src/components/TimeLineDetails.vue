@@ -1,48 +1,48 @@
 <template>
-  <v-timeline-item color=white >
-    <template v-slot:icon>
-      <v-icon large color="teal darken-2">
-        mdi-email
-      </v-icon>
-    </template>
-    <template v-slot:opposite>
-      <span>{{timeExecution}}</span>
-    </template>
-    <v-card class="elevation-24" outlined shaped>
-      <v-card-title class="headline">
-        Aplicación Ejecutada: <br> {{ studentId.applicationName }}
-      </v-card-title>
-      <v-card-subtitle> <br>
-        Tiempo total de ejecución: {{ durationSecondstoMinutes }} minutos
-      </v-card-subtitle>
-      <v-card-text>
-        Acción realizada: {{ studentId.action }} 
-      </v-card-text>
-    </v-card>
-  </v-timeline-item>
+  <v-timeline align-top dense>
+    <v-timeline-item v-for="detail in detailsData" :key="detail._id">
+      <v-card class="pa-3">
+        <v-row class="pt-1">
+          <v-col cols="12" md="3">
+            <strong>{{ parseDate(detail.time) }}</strong>
+          </v-col>
+          <v-col cols="12" md="9">
+            <strong>{{ detail.applicationName }}</strong>
+            <p class="caption mb-0">
+              {{ parseSecondToMinutes(detail.duration) }} min
+            </p>
+            <p class="caption mb-0">{{ detail.action }}</p>
+          </v-col>
+        </v-row>
+      </v-card>
+    </v-timeline-item>
+  </v-timeline>
 </template>
 
 <script>
-  import moment from "moment";
-  export default {
-    name: "TimeLineDetails",
-    props: {
-      studentId:
-        { default: () => [] },
+import moment from "moment";
+export default {
+  name: "TimeLineDetails",
+  props: {
+    studentId: { default: () => [] },
+    detailsData: {
+      type: Array,
+      default: () => [],
     },
-    computed: {
-      timeExecution() {
-        return moment(this.studentId.time).format("MM/DD/YYYY");
-      },
-      durationSecondstoMinutes() {
-        var minute = Math.floor((this.studentId.duration / 60) % 60);
-        minute = (minute < 10) ? '0' + minute : minute;
-        var second = this.studentId.duration % 60;
-        second = (second < 10) ? '0' + second : second;
-        return minute + ':' + second;
-      },
+  },
+  methods: {
+    parseDate: date => {
+      return moment(date).format("YYYY/MM/DD HH:mm:ss");
     },
-  };
+    parseSecondToMinutes: seconds => {
+      var minute = Math.floor((seconds / 60) % 60);
+      minute = minute < 10 ? "0" + minute : minute;
+      var second = seconds % 60;
+      second = second < 10 ? "0" + second : second;
+      return minute + ":" + second;
+    },
+  },
+};
 </script>
 
 <style></style>

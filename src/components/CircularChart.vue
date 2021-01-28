@@ -1,21 +1,18 @@
 <template>
-  <v-card class="pa-2">
-
-    <line-chart
-      v-if="loaded"
-      :chart-data="datacollection"
-    >
-    </line-chart>
+  <v-card class="px-10 py-6" elevation="5" color="secondary" rounded="xl">
+    <p class="text-h4 white--text">Top 5</p>
+    <doughnut-chart v-if="loaded" :chart-data="datacollection" :chartOptions="chartOptions">
+    </doughnut-chart>
   </v-card>
 </template>
 
 <script>
 //import { getDataToolbyDate } from "../utils/dataLoader";
-import LineChart from "./DoughnutChart.vue";
+import DoughnutChart from "./DoughnutChart.vue";
 export default {
   name: "CircularChart",
   components: {
-    LineChart,
+    DoughnutChart,
   },
   props: {
     componentId: {
@@ -33,27 +30,44 @@ export default {
   },
   data: () => ({
     loaded: false,
- //arreglos para recibir proper
+    //arreglos para recibir proper
     keys: [],
     values: [],
+    chartOptions: {
+        responsive: true,
+        maintainAspectRatio: true,
+        legend: {
+          display: true,
+          // position: 'bottom'
+          position: "bottom",
+          labels: {
+            boxWidth: 14,
+            fontSize: 14,
+            fontColor: "#fff"
+          }
+        },
+        elements: {
+          arc: {
+            borderColor: 'transparent',
+          }
+        }
+      },
     return: { datacollection: null },
-    
   }),
 
-   mounted() {
+  mounted() {
     this.loaded = false;
     //probando array
- console.log(this.topFiveData);
+    // console.log(this.topFiveData);
     try {
       //Recupero los datos del array  para mandar al diagrama
       this.topFiveData.forEach(element => {
         this.keys.push(element.nameTools);
         this.values.push(element.duration);
-         this.loaded = true;
+        this.loaded = true;
       });
-     
     } catch (e) {
-      console.error(e, "No se ejectuto bien el mountd");
+      console.error(e, "No se ejecuto bien el mounted");
     }
     this.fillData();
   },
@@ -63,30 +77,19 @@ export default {
         labels: this.keys,
         datasets: [
           {
-         //colores grafico
+            //colores grafico
             backgroundColor: [
-              "#2196F3",
-              "#4CAF50",
-              "#FF9800",
-              "#DD2C00",
-              "#5E35B1",
+              "#dceed1",
+              "#aac0aa",
+              "#736372",
+              "#a18276",
+              "#dec0f1",
             ],
-            //Colres hover
-            hoverBackgroundColor:[
-              "#880E4F",
-              "#AD1457",
-              "#C2185B",
-              "#D81B60",
-              "#EC407A"
-            ],
-            
-      
             data: this.values,
           },
         ],
       };
     },
-  
   },
 };
 </script>

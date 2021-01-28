@@ -3,7 +3,7 @@
     <section class="pa-6">
       <h2 class="text-h2">Estudiantes</h2>
       <!-- TABLA principal en componente -->
-      <table-students :students="studentsData"></table-students>
+      <table-students :students="mainTableData" :isLoading="isLoadingMainTableData" ></table-students>
     </section>
 
     <section class="pa-6">
@@ -37,7 +37,7 @@ import CurveChart from "../components/CurveChart.vue";
 import RangeDatePicker from "../components/RangeDatePicker.vue";
 import TableStudents from "../components/TableStudents.vue";
 
-import { getStudentByComponent, getLogsByComponent } from "../utils/dataLoader";
+import { getStudentByComponent, getLogsByComponent, getLastActivities } from "../utils/dataLoader";
 import { getPastWeek } from "../utils/dateutils";
 import{loadLogsTopFive}from "../utils/topFive"
 export default {
@@ -63,32 +63,37 @@ export default {
       new Date().toISOString().substr(0, 10),
     ],
     logsData: [],
-     topFiveData: [],
+    mainTableData: [],
+    isLoadingMainTableData: true,
+    topFiveData: [],
   }),
   async created() {
-    this.loadStudentData();
-    this.loadLogsData();
+    this.loadAllDataFromAPI();
     this.loadDataForTopFive();
   },
   methods: {
-    loadStudentData: async function () {
-      const resultado = await getStudentByComponent(this.componentId);
-      // this.pingResul = resultado.data;
-      this.studentsData = resultado.data.data;
+    loadAllDataFromAPI: async function(){
+      const resEstudents = await getStudentByComponent(this.componentId);
+      const resLogs = await getLogsByComponent(this.componentId, this.dates);
+
+      this.studentsData = resEstudents.data.data;
+      this.logsData = resLogs.data.data;
+
+      this.processData()
     },
-    loadLogsData: async function () {
-      const resultado = await getLogsByComponent(this.componentId, this.dates);
-      this.logsData = resultado.data.data;
-    },
-loadDataForTopFive:async function () {
-    this.loaded = false;
-      const resultado = await loadLogsTopFive(this.componentId, this.dates);
-      this.topFiveData = resultado;
-          this.loaded = true;
-      console.log("dash",this.topFiveData)
-      
+    processData: function() {
+      this.mainTableData = getLastActivities(this.logsData, this.studentsData);
+      this.isLoadingMainTableData = false;
     },
 
+    loadDataForTopFive:async function () {
+      this.loaded = false;
+      const resultado = await loadLogsTopFive(this.componentId, this.dates);
+      this.topFiveData = resultado;
+      this.loaded = true;
+      console.log("dash",this.topFiveData)
+    },
+    
     onDatesUpdate(newDates) {
       this.dates = newDates;
     },

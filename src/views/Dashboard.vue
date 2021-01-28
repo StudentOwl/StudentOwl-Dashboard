@@ -21,12 +21,9 @@
           :topFiveData="topFiveData"
         ></circular-chart>
         <curve-chart :componentId="componentId" :dates="dates"></curve-chart>
+        <curve-chart-pordias> </curve-chart-pordias>
       </div>
     </section>
-
-
-
-
   </div>
 </template>
 
@@ -36,10 +33,12 @@ import CircularChart from "../components/CircularChart.vue";
 import CurveChart from "../components/CurveChart.vue";
 import RangeDatePicker from "../components/RangeDatePicker.vue";
 import TableStudents from "../components/TableStudents.vue";
+import CurveChartPordias from "../components/CurveChartPordias.vue";
 
 import { getStudentByComponent, getLogsByComponent, getLastActivities } from "../utils/dataLoader";
 import { getPastWeek } from "../utils/dateutils";
-import{loadLogsTopFive}from "../utils/topFive"
+import{loadLogsTopFive}from "../utils/topFive";
+
 export default {
   name: "Home",
   components: {
@@ -47,6 +46,8 @@ export default {
     CircularChart,
     CurveChart,
     RangeDatePicker,
+    CurveChartPordias,
+   
   },
   props: {
     componentId: {

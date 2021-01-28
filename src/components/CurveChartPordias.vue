@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>GRÁFICA POR HORAS</h1>
+    <h1>GRÁFICA POR DIAS</h1>
     
     <line-chart v-if="loaded" :chart-data="datacollection" :height="200"></line-chart>
   </div>
@@ -9,7 +9,7 @@
 
 <script>
 //import {getDataToolbyDate } from "../utils/dataLoader";
-import LineChart from './CurveChart2.vue'
+import LineChart from './Diagrama_porDias.vue'
 export default {
 
   name: "CurveChart",
@@ -34,23 +34,13 @@ export default {
     loaded: false,
     chartdata: null,
     
-    keys: [],
-    values: [],
+    
     //horas
     horas: [],
     //tiempo 
-    tiempototal: [],
-    arr: [],
-   tiempo:[],
-    porhoras: [
-  { _id: '17', totalTime: 780 },
-  { _id: '00', totalTime: 9 },
-  { _id: '16', totalTime: 3020 },
-  { _id: '15', totalTime: 1986 },
-  { _id: '22', totalTime: 380 },
-  { _id: '23', totalTime: 788 }
-],
-     pordias: [
+    tiempototal: [],  
+    dias:[],
+    pordias: [
   { _id: '2021-01-27', totalTime: 9 },
   { _id: '2021-01-25', totalTime: 5786 },
   { _id: '2021-01-26', totalTime: 1168 }
@@ -78,16 +68,15 @@ export default {
    console.log("values",this.values)
     */
      
-    for (var i in this.porhoras){
-      this.porhoras.sort((a, b) => a._id - b._id);
+    for (var i in this.pordias){
+      this.pordias.sort((a, b) => a._id - b._id);
 
-      this.horas.push(this.porhoras[i]._id+":00")
-      this.tiempototal.push(this.porhoras[i].totalTime)
+      this.dias.push(this.pordias[i]._id)
+      this.tiempototal.push(this.pordias[i].totalTime)
     }
     
     
-  
-    console.log("horas",this.horas)
+    console.log("horas",this.dias)
     console.log("tiempo total",this.tiempototal)
     
     
@@ -102,24 +91,25 @@ export default {
     {
       
       this.datacollection = {
-        labels: this.horas,
+        labels: this.dias,
       
-       
+        options: {
+  legend: {
+    display: false
+  }
+},
         datasets: [
           { 
-            label:  ['Tiempo por Horas'],
-          
-           //colorGrafica
-            backgroundColor: '#18cfca',
-            borderColor: '#1868cf',
+            label:  ['Tiempo por Dias'],
+            
+           
+            backgroundColor: '#23bc58',
+            borderColor: '#0d4f24',
             pointColor: '#18cf60',
             pointBorderColor: '#185dcf',
-            pointBackgroundColor: '#23cf18',  
+            pointBackgroundColor: '#4c524e',  
             
             data: this.tiempototal
-           // display: false,
-            
-
            
           },
         

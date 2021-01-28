@@ -23,10 +23,6 @@
         <curve-chart :componentId="componentId" :dates="dates"></curve-chart>
       </div>
     </section>
-
-
-
-
   </div>
 </template>
 
@@ -56,7 +52,7 @@ export default {
   },
   data: () => ({
     studentsData: [],
-     loaded: false,
+    loaded: false,
     pingResul: "",
     dates: [
       getPastWeek(new Date()).toISOString().substr(0, 10),

@@ -71,10 +71,11 @@ export async function getLogsByComponentAndStudent(
   }
 }
 
-export async function getNamesbyStudent(studentId) {
-  var student = `&msStudent=${studentId}`;
-
-  var query = `${API_URI}api/v1.0/logs/all?student=${student}`;
+export async function getNamesbyStudent(studentId, dates) {
+  var student = `&student=${studentId}`;
+  var msStart = `&msStart=${convertDateToMiliseconds(dates[0])}`;
+  var msEnd = `&msEnd=${convertDateToMiliseconds(dates[1])}`;
+  var query = `${API_URI}api/v1.0/logs/all?component=GTPR01${student}${msStart}${msEnd}`;
   console.log(query);
   try {
     const res = await axios.get(query);

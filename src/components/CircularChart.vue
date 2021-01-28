@@ -1,16 +1,16 @@
 <template>
-  <v-card elevation="2">
-    <h2 class="text-h2">Circle chart</h2>
+  <v-card class="pa-2">
+
     <line-chart
       v-if="loaded"
       :chart-data="datacollection"
-      :height="450"
-    ></line-chart>
+    >
+    </line-chart>
   </v-card>
 </template>
 
 <script>
-import { getDataToolbyDate } from "../utils/dataLoader";
+//import { getDataToolbyDate } from "../utils/dataLoader";
 import LineChart from "./DoughnutChart.vue";
 export default {
   name: "CircularChart",
@@ -26,26 +26,32 @@ export default {
       type: Array,
       required: true,
     },
+    topFiveData: {
+      type: Array,
+      required: true,
+    },
   },
   data: () => ({
     loaded: false,
-    chartdata: null,
+ //arreglos para recibir proper
     keys: [],
     values: [],
     return: { datacollection: null },
+    
   }),
 
-  async mounted() {
+   mounted() {
     this.loaded = false;
+    //probando array
+ console.log(this.topFiveData);
     try {
-      const resultado = await getDataToolbyDate(this.componentId, this.dates);
-      this.chartdata = resultado.data;
-      for (var key in this.chartdata) {
-        this.keys.push(key);
-        this.values.push(this.chartdata[key]);
-      }
-
-      this.loaded = true;
+      //Recupero los datos del array  para mandar al diagrama
+      this.topFiveData.forEach(element => {
+        this.keys.push(element.nameTools);
+        this.values.push(element.duration);
+         this.loaded = true;
+      });
+     
     } catch (e) {
       console.error(e, "No se ejectuto bien el mountd");
     }
@@ -57,20 +63,30 @@ export default {
         labels: this.keys,
         datasets: [
           {
-            label: this.keys,
+         //colores grafico
             backgroundColor: [
-              "#385f71",
-              "#2b4162",
-              "#385f71",
-              "#f5f0f6",
-              "#d7b377",
-              "#8f754f",
+              "#2196F3",
+              "#4CAF50",
+              "#FF9800",
+              "#DD2C00",
+              "#5E35B1",
             ],
+            //Colres hover
+            hoverBackgroundColor:[
+              "#880E4F",
+              "#AD1457",
+              "#C2185B",
+              "#D81B60",
+              "#EC407A"
+            ],
+            
+      
             data: this.values,
           },
         ],
       };
     },
+  
   },
 };
 </script>

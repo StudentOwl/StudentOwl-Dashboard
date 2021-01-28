@@ -20,7 +20,7 @@ export default {
 
             title: {
              // text: 'Tiempo por Horas',
-              display:false,
+             // display:true,
              
             },scales: {
           yAxes: [

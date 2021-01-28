@@ -19,6 +19,7 @@
           :dates="dates"
         ></circular-chart>
         <curve-chart :componentId="componentId" :dates="dates"></curve-chart>
+        <curve-chart-pordias> </curve-chart-pordias>
       </div>
     </section>
   </div>
@@ -30,9 +31,11 @@ import CircularChart from "../components/CircularChart.vue";
 import CurveChart from "../components/CurveChart.vue";
 import RangeDatePicker from "../components/RangeDatePicker.vue";
 import TableStudents from "../components/TableStudents.vue";
+import CurveChartPordias from "../components/CurveChartPordias.vue";
 
 import { getStudentByComponent, getLogsByComponent } from "../utils/dataLoader";
 import { getPastWeek } from "../utils/dateutils";
+
 export default {
   name: "Home",
   components: {
@@ -40,6 +43,8 @@ export default {
     CircularChart,
     CurveChart,
     RangeDatePicker,
+    CurveChartPordias,
+   
   },
   props: {
     componentId: {

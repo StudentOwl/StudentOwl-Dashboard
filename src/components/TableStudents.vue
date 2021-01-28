@@ -23,7 +23,7 @@
 
     <template v-slot:item.actions="{ item }"
       ><v-btn icon color="secodary" :to="`detail/${item.username}`"
-        ><v-icon>mdi-information-outline</v-icon></v-btn
+        ><v-icon>mdi-timeline-check-outline</v-icon></v-btn
       ></template
     >
   </v-data-table>
@@ -59,7 +59,7 @@ export default {
       if (date === '-') {
         return '-'
       }
-      return format(date, 'yyyy-MM-dd',{locale:'es'});
+      return format(date, 'YYYY-MM-DD',{locale:'es'});
     },
     parseDateToTime: function(date) {
       if (date === '-') {

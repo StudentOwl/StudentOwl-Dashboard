@@ -13,7 +13,7 @@
       </h2>
       <div class="d-flex justify-space-between mb-6">
         <!--Visualización de gráfico de curvas-->
-        <curve-chart></curve-chart>
+        <!-- <curve-chart></curve-chart> -->
       </div>
       <div class="d-flex justify-space-between mb-6">
         <!--Visualización de gráfico de curvas-->
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import CurveChart from "../components/CurveChart.vue";
+// import CurveChart from "../components/CurveChart.vue";
 import TableDetails from "../components/TableDetails.vue";
 import { getPastWeek } from "../utils/dateutils.js";
 
@@ -38,7 +38,7 @@ export default {
   name: "Detail",
   components: {
     TableDetails,
-    CurveChart,
+    // CurveChart,
   },
   props: {
     student: {

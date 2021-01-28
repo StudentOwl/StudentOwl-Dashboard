@@ -16,10 +16,8 @@ export default {
           position: "bottom",
           // position: 'right'
         },
-
-        title: {
-          // text: 'Tiempo por Horas',
-          display: false,
+        tooltips: {
+          mode: 'y',
         },
         scales: {
           yAxes: [
@@ -41,6 +39,17 @@ export default {
             },
           ],
         },
+        elements: {
+          line: {
+            borderColor: 'transparent',
+            backgroundColor: '#283593'
+          },
+          point: {
+            radius: 3,
+            backgroundColor: 'transparent',
+            borderColor: 'transparent'
+          }
+        }
       },
     };
   },

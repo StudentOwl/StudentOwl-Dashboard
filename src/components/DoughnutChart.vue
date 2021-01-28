@@ -6,18 +6,10 @@ const { reactiveProp } = mixins;
 export default {
   extends: Doughnut,
   mixins: [reactiveProp],
-  props: ["chartData"],
+  props: ["chartData", "chartOptions"],
   data() {
     return {
-      chartOptions: {
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: {
-          display: true,
-          // position: 'bottom'
-          position: "right",
-        },
-      },
+      
     };
   },
   mounted() {

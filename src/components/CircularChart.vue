@@ -1,7 +1,7 @@
 <template>
-  <v-card class="px-10 pt-6" elevation="5" color="secondary" rounded="xl">
-    <p class="text-h4 white--text mb-n5">Applicaciones más usadas</p>
-    <doughnut-chart v-if="loaded" :chart-data="datacollection">
+  <v-card class="px-10 py-6" elevation="5" color="secondary" rounded="xl">
+    <p class="text-h4 white--text">Top 5</p>
+    <doughnut-chart v-if="loaded" :chart-data="datacollection" :chartOptions="chartOptions">
     </doughnut-chart>
   </v-card>
 </template>
@@ -33,13 +33,32 @@ export default {
     //arreglos para recibir proper
     keys: [],
     values: [],
+    chartOptions: {
+        responsive: true,
+        maintainAspectRatio: true,
+        legend: {
+          display: true,
+          // position: 'bottom'
+          position: "bottom",
+          labels: {
+            boxWidth: 14,
+            fontSize: 14,
+            fontColor: "#fff"
+          }
+        },
+        elements: {
+          arc: {
+            borderColor: 'transparent',
+          }
+        }
+      },
     return: { datacollection: null },
   }),
 
   mounted() {
     this.loaded = false;
     //probando array
-    console.log(this.topFiveData);
+    // console.log(this.topFiveData);
     try {
       //Recupero los datos del array  para mandar al diagrama
       this.topFiveData.forEach(element => {
@@ -60,21 +79,12 @@ export default {
           {
             //colores grafico
             backgroundColor: [
-              "#2196F3",
-              "#4CAF50",
-              "#FF9800",
-              "#DD2C00",
-              "#5E35B1",
+              "#dceed1",
+              "#aac0aa",
+              "#736372",
+              "#a18276",
+              "#dec0f1",
             ],
-            //Colres hover
-            hoverBackgroundColor: [
-              "#880E4F",
-              "#AD1457",
-              "#C2185B",
-              "#D81B60",
-              "#EC407A",
-            ],
-
             data: this.values,
           },
         ],

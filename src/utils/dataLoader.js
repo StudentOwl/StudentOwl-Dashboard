@@ -130,3 +130,23 @@ export function getLastActivities(logsData, studentData) {
   });
   return dataClean;
 }
+
+//Metodo para filtrar un top 5 de herramientas
+export async function getLogsTopFive(componentId, dates) {
+  var msStart = `&msStart=${convertDateToMiliseconds(dates[0])}`;
+  var msEnd = `&msEnd=${convertDateToMiliseconds(dates[1])}`;
+
+  var query = `${API_URI}api/v1.0/logs/all?component=${componentId}${msStart}${msEnd}`;
+  console.log(query);
+  try {
+    const res = await axios.get(query);
+    if (res) {
+      return res;
+    } else {
+      return null;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+

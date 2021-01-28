@@ -15,12 +15,18 @@
       <!-- GRAFICOS GENERALES en componente -->
       <div class="d-flex justify-space-between mb-6">
         <circular-chart
+         v-if="loaded"
           :componentId="componentId"
           :dates="dates"
+          :topFiveData="topFiveData"
         ></circular-chart>
         <curve-chart :componentId="componentId" :dates="dates"></curve-chart>
       </div>
     </section>
+
+
+
+
   </div>
 </template>
 
@@ -33,6 +39,7 @@ import TableStudents from "../components/TableStudents.vue";
 
 import { getStudentByComponent, getLogsByComponent, getLastActivities } from "../utils/dataLoader";
 import { getPastWeek } from "../utils/dateutils";
+import{loadLogsTopFive}from "../utils/topFive"
 export default {
   name: "Home",
   components: {
@@ -49,6 +56,7 @@ export default {
   },
   data: () => ({
     studentsData: [],
+     loaded: false,
     pingResul: "",
     dates: [
       getPastWeek(new Date()).toISOString().substr(0, 10),
@@ -57,9 +65,11 @@ export default {
     logsData: [],
     mainTableData: [],
     isLoadingMainTableData: true,
+    topFiveData: [],
   }),
   async created() {
     this.loadAllDataFromAPI();
+    this.loadDataForTopFive();
   },
   methods: {
     loadAllDataFromAPI: async function(){
@@ -75,6 +85,15 @@ export default {
       this.mainTableData = getLastActivities(this.logsData, this.studentsData);
       this.isLoadingMainTableData = false;
     },
+
+    loadDataForTopFive:async function () {
+      this.loaded = false;
+      const resultado = await loadLogsTopFive(this.componentId, this.dates);
+      this.topFiveData = resultado;
+      this.loaded = true;
+      console.log("dash",this.topFiveData)
+    },
+    
     onDatesUpdate(newDates) {
       this.dates = newDates;
     },

@@ -59,13 +59,13 @@ export default {
       if (date === '-') {
         return '-'
       }
-      return format(date, 'yyyy-MM-dd');
+      return format(date, 'yyyy-MM-dd',{locale:'es'});
     },
     parseDateToTime: function(date) {
       if (date === '-') {
         return '-'
       }
-      return format(date, 'HH:mm:ss');
+      return format(date, 'HH:mm:ss', {locale: 'es'});
     }
   }
 };

@@ -113,14 +113,19 @@ export function getLastActivities(logsData, studentData) {
   });
 
   dataClean.forEach(student => {
-    const findedLog = logsData.find(log => log.student === student.username)
+    const findedLog = logsData.find(log => log.student === student.username);
     
     if (findedLog) {
+      const acctionTime = new Date(findedLog.time);
+      var date = new Date(acctionTime.getFullYear(), acctionTime.getMonth(), acctionTime.getDate())
+
       student["lastAction"] = findedLog.action;
+      student["lastDate"] = date;
       student["lastTime"] = new Date(findedLog.time);
     } else {
-      student["lastAction"] = "Vacio";
-      student["lastTime"] = "vacio";
+      student["lastAction"] = "-";
+      student["lastDate"] = "-";
+      student["lastTime"] = "-";
     }
   });
   return dataClean;

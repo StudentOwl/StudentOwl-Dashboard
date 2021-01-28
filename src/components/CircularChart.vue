@@ -1,5 +1,5 @@
 <template>
-  <v-card class="pa-">
+  <v-card class="pa-2">
 
     <line-chart
       v-if="loaded"
@@ -33,7 +33,7 @@ export default {
   },
   data: () => ({
     loaded: false,
- //arre
+ //arreglos para recibir proper
     keys: [],
     values: [],
     return: { datacollection: null },

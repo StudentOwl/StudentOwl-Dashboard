@@ -1,11 +1,11 @@
 <template>
-  <v-card class="pa-2">
-  <p align="center">Top 5 de herramientas</p>
+  <v-card class="pa-">
+
     <line-chart
       v-if="loaded"
       :chart-data="datacollection"
-      
-    ></line-chart>
+    >
+    </line-chart>
   </v-card>
 </template>
 
@@ -33,22 +33,25 @@ export default {
   },
   data: () => ({
     loaded: false,
-    chartdata: null,
+ //arre
     keys: [],
     values: [],
     return: { datacollection: null },
     
   }),
-//probando
+
    mounted() {
     this.loaded = false;
-    if(this.topFiveData)
+    //probando array
+ console.log(this.topFiveData);
     try {
+      //Recupero los datos del array  para mandar al diagrama
       this.topFiveData.forEach(element => {
         this.keys.push(element.nameTools);
         this.values.push(element.duration);
+         this.loaded = true;
       });
-      this.loaded = true;
+     
     } catch (e) {
       console.error(e, "No se ejectuto bien el mountd");
     }
@@ -60,14 +63,15 @@ export default {
         labels: this.keys,
         datasets: [
           {
-            label: "Top 5",
+         //colores grafico
             backgroundColor: [
-              "#4A148C",
-              "#6A1B9A",
-              "#7B1FA2",
-              "#8E24AA",
-              "#AB47BC",
+              "#2196F3",
+              "#4CAF50",
+              "#FF9800",
+              "#DD2C00",
+              "#5E35B1",
             ],
+            //Colres hover
             hoverBackgroundColor:[
               "#880E4F",
               "#AD1457",
@@ -75,12 +79,14 @@ export default {
               "#D81B60",
               "#EC407A"
             ],
+            
       
             data: this.values,
           },
         ],
       };
     },
+  
   },
 };
 </script>

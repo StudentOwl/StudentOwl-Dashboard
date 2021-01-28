@@ -1,5 +1,5 @@
 <template>
-  <v-card class="pa-">
+  <v-card class="pa-2">
 
     <line-chart
       v-if="loaded"

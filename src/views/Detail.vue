@@ -23,7 +23,6 @@
 <script>
 //import CurveChart from "../components/CurveChart.vue";
 import TimeLineDetails from "../components/TimeLineDetails.vue";
-import { getPastWeek } from "../utils/dateutils.js";
 
 import { getLogsByComponentAndStudent, getInfoStudent } from "../utils/dataLoader";
 
@@ -41,13 +40,13 @@ export default {
       type: String,
       required: true,
     },
+    dates: {
+      type: Array,
+      default: () => [],
+    }
   },
   data: () => ({
     detailsData: [],
-    dates: [
-      getPastWeek(new Date()).toISOString().substr(0, 10),
-      new Date().toISOString().substr(0, 10),
-    ],
     studentData: {
       type: Object,
       default: () => {}

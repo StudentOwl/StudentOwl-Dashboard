@@ -94,20 +94,9 @@
 
                 <v-subheader>RANGO DE CONSULTA</v-subheader>
                 <!-- Selector de fechas -->
-                <range-date-picker @changeRange="onDatesUpdate" />
-                <!-- <v-date-picker
-                  v-model="dates"
-                  range
-                  no-title
-                  full-width
-                  elevation="3"
-                >
-                  <v-spacer></v-spacer>
-                    <v-btn text color="primary" @click="menu = false">
-                      Cancel
-                    </v-btn>
-                    <v-btn text color="primary" @click="saveRange"> OK </v-btn>
-                </v-date-picker> -->
+                <v-date-picker v-model="dates" range no-title full-width elevation="3">
+                </v-date-picker>
+                <pre>{{ dateRangeText }}</pre>
               </v-list>
             </v-sheet>
           </v-col>
@@ -123,13 +112,12 @@
 </template>
 
 <script>
-import RangeDatePicker from "./components/RangeDatePicker.vue";
-import { getPastWeek } from "./utils/dateutils";
+import { getPastWeek, getTodayFinal } from "./utils/dateutils";
 
 export default {
   name: "App",
 
-  components: {RangeDatePicker},
+  components: {},
 
   data: () => ({
     drawer: null,
@@ -145,7 +133,7 @@ export default {
     },
     dates: [
       getPastWeek(new Date()).toISOString().substr(0, 10),
-      new Date().toISOString().substr(0, 10),
+      getTodayFinal(new Date()).toISOString().substr(0, 10),
     ],
   }),
   mounted() {
@@ -163,6 +151,11 @@ export default {
     },
     onDatesUpdate(newDates) {
       this.dates = newDates;
+    }
+  },
+  computed: {
+    dateRangeText() {
+      return "De " + this.dates.join(" a ");
     },
   },
 };

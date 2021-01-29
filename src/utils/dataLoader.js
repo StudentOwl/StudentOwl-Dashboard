@@ -35,7 +35,7 @@ export async function getLogsByComponent(componentId, dates) {
   var msEnd = `&msEnd=${convertDateToMiliseconds(dates[1])}`;
 
   var query = `${API_URI}api/v1.0/logs/all?component=${componentId}${msStart}${msEnd}`;
-  console.log(query);
+  console.log("LogsByComponent", query);
   try {
     const res = await axios.get(query);
     if (res) {
@@ -58,7 +58,7 @@ export async function getLogsByComponentAndStudent(
   var msEnd = `&msEnd=${convertDateToMiliseconds(dates[1])}`;
 
   var query = `${API_URI}api/v1.0/logs/all?component=${componentId}${student}${msStart}${msEnd}`;
-  console.log(query);
+  console.log("LogsByComponentAndStudent", query);
   try {
     const res = await axios.get(query);
     if (res) {
@@ -76,7 +76,7 @@ export async function getDataToolbyDate(componentId, dates) {
   var msEnd = `&msEnd=${convertDateToMiliseconds(dates[1])}`;
 
   var query = `${API_URI}api/v1.0/logs/data/applicationuse?component=${componentId}${msStart}${msEnd}`;
-  console.log(query);
+  console.log("DataToolbyDate", query);
   try {
     const res = await axios.get(query);
     if (res) {
@@ -127,7 +127,7 @@ export async function getLogsTopFive(componentId, dates) {
   var msEnd = `&msEnd=${convertDateToMiliseconds(dates[1])}`;
 
   var query = `${API_URI}api/v1.0/logs/all?component=${componentId}${msStart}${msEnd}`;
-  console.log(query);
+  console.log("LogsTopFive", query);
   try {
     const res = await axios.get(query);
     if (res) {

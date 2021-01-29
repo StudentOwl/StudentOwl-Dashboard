@@ -6,6 +6,7 @@
       app
       color="white"
       temporary
+      v-if="authenticated"
     >
       <v-list-item>
         <v-list-item-content>
@@ -38,6 +39,7 @@
         <v-app-bar-nav-icon
           class="d-md-none"
           @click="drawer = !drawer"
+          v-if="authenticated"
         ></v-app-bar-nav-icon>
         <div class="d-flex align-center">
           <v-toolbar-title>DASHBOARD</v-toolbar-title>
@@ -69,29 +71,39 @@
     <v-main>
       <v-container>
         <v-row>
-          <v-col class="d-none d-md-block" md="3">
+          <v-col class="d-none d-md-block" md="3" v-if="authenticated">
             <v-sheet rounded="lg">
               <v-list color="transparent">
-                <v-list-item
-                  v-for="component in components"
-                  :key="component.code"
-                  link
-                >
-                  <v-list-item-content>
-                    <v-list-item-title>
-                      {{ component.name }}
-                    </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
+                <v-subheader>COMPONENTES</v-subheader>
+                <v-list-item-group>
+                  <v-list-item
+                    v-for="component in components"
+                    :key="component.code"
+                    link
+                    :to="`/dashboard/${component.code}`"
+                  >
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        {{ component.name }}
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-list-item-group>
 
                 <v-divider class="my-2"></v-divider>
+
+                <v-subheader>RANGO DE CONSULTA</v-subheader>
+                <!-- Selector de fechas -->
+                <v-date-picker v-model="dates" range no-title full-width elevation="3">
+                </v-date-picker>
+                <pre>{{ dateRangeText }}</pre>
               </v-list>
             </v-sheet>
           </v-col>
 
           <!-- Main Container -->
           <v-col cols="12" md="9">
-            <router-view></router-view>
+            <router-view @onauthenticated="setAuthenticated" :dates="dates"></router-view>
           </v-col>
         </v-row>
       </v-container>
@@ -100,6 +112,8 @@
 </template>
 
 <script>
+import { getPastWeek, getTodayFinal } from "./utils/dateutils";
+
 export default {
   name: "App",
 
@@ -108,29 +122,41 @@ export default {
   data: () => ({
     drawer: null,
     components: [
-      { name: "Gestion de proyectos", code: "GTPR01" },
-      { name: "Ingenieria de requisitos", code: "IGRT01" },
-      { name: "Gestion Productiva", code: "GSPR01" },
+      { name: "Gestión de proyectos", code: "GTPR01" },
+      { name: "Ingeniería de requisitos", code: "IGRT01" },
+      { name: "Gestión Productiva", code: "GSPR01" },
     ],
     authenticated: false,
     studentOwlAccount: {
       username: "mpabad",
       password: "12345",
     },
-    mounted() {
-      if (!this.authenticated) {
-        this.$router.replace({ name: "Login" });
-      }
-    },
-    methods: {
-      setAuthenticated: function (status) {
-        console.log(status);
-        this.authenticated = status;
-      },
-      logout: function () {
-        this.authenticated = false;
-      },
-    },
+    dates: [
+      getPastWeek(new Date()).toISOString().substr(0, 10),
+      getTodayFinal(new Date()).toISOString().substr(0, 10),
+    ],
   }),
+  mounted() {
+    if (!this.authenticated) {
+      this.$router.replace({ name: "Login" });
+    }
+  },
+  methods: {
+    setAuthenticated: function (status) {
+      // console.log(status);
+      this.authenticated = status;
+    },
+    logout: function () {
+      this.authenticated = false;
+    },
+    onDatesUpdate(newDates) {
+      this.dates = newDates;
+    }
+  },
+  computed: {
+    dateRangeText() {
+      return "De " + this.dates.join(" a ");
+    },
+  },
 };
 </script>

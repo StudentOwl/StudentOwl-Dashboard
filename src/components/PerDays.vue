@@ -1,6 +1,6 @@
 <template>
   <v-card class="px-6 py-6" elevation="5" color="secondary" rounded="xl">
-    <h1 class="text-h5 white--text">Por dias</h1>
+    <h1 class="text-h5 white--text">Por días</h1>
     <line-chart
       v-if="loaded"
       :chart-data="datacollection"
@@ -19,14 +19,10 @@ export default {
     LineChart,
   },
   props: {
-    componentId: {
-      type: String,
-      required: true,
-    },
-    dates: {
+    pordias: {
       type: Array,
-      required: true,
-    },
+      default: () => []
+    }
   },
   data: () => ({
     loaded: false,
@@ -37,39 +33,32 @@ export default {
     //tiempo
     tiempototal: [],
     dias: [],
-    pordias: [
-      { _id: "2021-01-27", totalTime: 9 },
-      { _id: "2021-01-25", totalTime: 5786 },
-      { _id: "2021-01-26", totalTime: 1168 },
-    ],
 
-    return: { datacollection: null },
+    datacollection: null,
   }),
 
   async mounted() {
     this.loaded = false;
 
     try {
-      /* const resultado = await getDataToolbyDate(this.componentId, this.dates);
-      this.chartdata = resultado.data;
-      console.log("comparacion",resultado.data)
-      for (var key in this.chartdata) {
-         this.keys.push(key)
-         this.values.push(this.chartdata[key])              
-}
-   console.log("keys",this.keys)
-   console.log("values",this.values)
-    */
 
       for (var i in this.pordias) {
-        this.pordias.sort((a, b) => a._id - b._id);
+        this.pordias.sort((a, b) => {
+          if (a._id > b._id) {
+            return 1;
+          }
+          if (a._id < b._id) {
+            return -1;
+          }
+          return 0;
+        });
 
         this.dias.push(this.pordias[i]._id);
         this.tiempototal.push(this.pordias[i].totalTime);
       }
 
-      console.log("horas", this.dias);
-      console.log("tiempo total", this.tiempototal);
+      // console.log("horas", this.dias);
+      // console.log("tiempo total", this.tiempototal);
 
       this.loaded = true;
     } catch (e) {

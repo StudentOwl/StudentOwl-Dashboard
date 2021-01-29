@@ -4,7 +4,7 @@
       <!--Nombre del Estudiante-->
       <!-- reemplazar this.student por el name y lastname -->
       <h2 class="text-h2">
-        {{ this.student }} {{ this.student }}
+        {{ studentData.lastname }} {{ studentData.name }}
       </h2>
       <!--Visualización de la tabla de detalles-->
     </section>
@@ -23,9 +23,8 @@
 <script>
 //import CurveChart from "../components/CurveChart.vue";
 import TimeLineDetails from "../components/TimeLineDetails.vue";
-import { getPastWeek } from "../utils/dateutils.js";
 
-import { getNamesbyStudent } from "../utils/dataLoader";
+import { getLogsByComponentAndStudent, getInfoStudent } from "../utils/dataLoader";
 
 export default {
   name: "Detail",
@@ -33,33 +32,50 @@ export default {
     TimeLineDetails,
   },
   props: {
+    componentId: {
+      type: String,
+      required: true
+    },
     student: {
       type: String,
       required: true,
     },
+    dates: {
+      type: Array,
+      default: () => [],
+    }
   },
   data: () => ({
     detailsData: [],
-    dates: [
-      getPastWeek(new Date()).toISOString().substr(0, 10),
-      new Date().toISOString().substr(0, 10),
-    ],
+    studentData: {
+      type: Object,
+      default: () => {}
+    }
   }),
   async created() {
+    this.loadStudentInfo();
     this.loadDetailsData();
   },
   methods: {
     loadDetailsData: async function () {
-      const resultado = await getNamesbyStudent(
-        /*
-          this.name, this.lastname
-          */
+      const resultado = await getLogsByComponentAndStudent(
+        this.componentId,
         this.student,
-        this.dates,
-        console.log(this.student)
+        this.dates
       );
-      this.detailsData = resultado.data.data;
+      if (resultado) {
+        this.detailsData = resultado.data.data;
+      } else {
+        console.log("Problema");
+      }
     },
+    loadStudentInfo: async function () {
+      const resultado = await getInfoStudent(this.student);
+
+      if (resultado) {
+        this.studentData = resultado.data.data;
+      }
+    }
   },
 };
 </script>

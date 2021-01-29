@@ -9,11 +9,11 @@
     loading-text="Cargando..."
   >
 
-    <template v-slot:item.lastDate="{ item }"
+    <!-- <template v-slot:item.lastDate="{ item }"
       >
       {{ parseDateToDate(item.lastDate) }}
       </template
-    >
+    > -->
 
     <template v-slot:item.lastTime="{ item }"
       >
@@ -22,7 +22,7 @@
     >
 
     <template v-slot:item.actions="{ item }"
-      ><v-btn icon color="secodary" :to="`detail/${item.username}`"
+      ><v-btn icon color="secodary" :to="`${componentId}/detail/${item.username}`"
         ><v-icon>mdi-timeline-check-outline</v-icon></v-btn
       ></template
     >
@@ -30,7 +30,9 @@
 </template>
 
 <script>
+import moment from "moment";
 import { format } from "date-fns";
+// import formatRelative from "date-fns/formatRelative";
 
 export default {
   name: "TableStudents",
@@ -43,13 +45,17 @@ export default {
       type: Boolean,
       default: false,
     },
+    componentId: {
+      type: String,
+      default: ""
+    }
   },
   data: () => ({
     headers: [
       { text: "Estudiante", value: "name" },
       { text: "Accion", value: "lastAction", sortable: false },
-      { text: "Fecha", value: "lastDate", sortable: true },
-      { text: "Hora", value: "lastTime", sortable: true },
+      // { text: "Fecha", value: "lastDate", sortable: true },
+      { text: "Fecha", value: "lastTime", sortable: true },
       { text: "Detalle", value: "actions", sortable: false }
     ],
   }),
@@ -59,13 +65,17 @@ export default {
       if (date === '-') {
         return '-'
       }
-      return format(date, 'YYYY-MM-DD',{locale:'es'});
+      return format(date, 'yyyy-MM-dd');
     },
     parseDateToTime: function(date) {
       if (date === '-') {
         return '-'
       }
-      return format(date, 'HH:mm:ss', {locale: 'es'});
+      // return format(date, 'HH:mm:ss', {locale: 'es'});
+      // console.log(formatRelative(date, new Date()));
+      // return formatRelative(date, new Date(), {locale: 'es'});
+      moment.locale('es');
+      return moment(date).calendar();
     }
   }
 };

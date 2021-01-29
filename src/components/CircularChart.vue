@@ -1,7 +1,11 @@
 <template>
   <v-card class="px-10 py-6" elevation="5" color="secondary" rounded="xl">
-    <p class="text-h4 white--text">Top 5</p>
-    <doughnut-chart v-if="loaded" :chart-data="datacollection" :chartOptions="chartOptions">
+    <p class="text-h4 white--text">Las 5 más usadas</p>
+    <doughnut-chart
+      v-if="loaded"
+      :chart-data="datacollection"
+      :chartOptions="chartOptions"
+    >
     </doughnut-chart>
   </v-card>
 </template>
@@ -15,14 +19,6 @@ export default {
     DoughnutChart,
   },
   props: {
-    componentId: {
-      type: String,
-      required: true,
-    },
-    dates: {
-      type: Array,
-      required: true,
-    },
     topFiveData: {
       type: Array,
       required: true,
@@ -34,24 +30,24 @@ export default {
     keys: [],
     values: [],
     chartOptions: {
-        responsive: true,
-        maintainAspectRatio: true,
-        legend: {
-          display: true,
-          // position: 'bottom'
-          position: "bottom",
-          labels: {
-            boxWidth: 14,
-            fontSize: 14,
-            fontColor: "#fff"
-          }
+      responsive: true,
+      maintainAspectRatio: true,
+      legend: {
+        display: true,
+        // position: 'bottom'
+        position: "bottom",
+        labels: {
+          boxWidth: 14,
+          fontSize: 14,
+          fontColor: "#fff",
         },
-        elements: {
-          arc: {
-            borderColor: 'transparent',
-          }
-        }
       },
+      elements: {
+        arc: {
+          borderColor: "transparent",
+        },
+      },
+    },
     return: { datacollection: null },
   }),
 

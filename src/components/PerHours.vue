@@ -17,14 +17,6 @@ export default {
     LineChart,
   },
   props: {
-    componentId: {
-      type: String,
-      required: true,
-    },
-    dates: {
-      type: Array,
-      required: true,
-    },
     porhoras: {
       type: Array,
       default: () => [],

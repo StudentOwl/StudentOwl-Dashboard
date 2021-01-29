@@ -1,6 +1,6 @@
-import { getLogsTopFive } from "../utils/dataLoader";
+// import { getLogsTopFive } from "../utils/dataLoader";
 
-export async function loadLogsTopFive(componentId, dates) {
+export async function loadLogsTopFive(componentId, dates, resultado) {
   var elementos = [];
   var repetidos = [];
   var num = [];
@@ -9,9 +9,10 @@ export async function loadLogsTopFive(componentId, dates) {
   const newArr = [];
   const myObj = {};
   //Obtencion de datos de la API
-  const resultado = await getLogsTopFive(componentId, dates);
+  // const resultado = await getLogsTopFive(componentId, dates);
   //Almacenamos en un Array los elementos guardados
-  elementos = resultado.data.data;
+  // elementos = resultado.data.data;
+  elementos = resultado;
   /// console.log("imprimiendo datos",elementos.applicationName)
   //---------------------------------------------------------------------///
   //Obtenemos los objetos q se repiten

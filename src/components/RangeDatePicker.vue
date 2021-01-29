@@ -10,7 +10,12 @@
 import { getPastWeek } from "../utils/dateutils";
 export default {
   name: "RangeDatePicker",
-  props: {},
+  props: {
+    // dates: {
+    //   type: Array,
+    //   default: () => []
+    // }
+  },
   data: () => ({
     dates: [
       getPastWeek(new Date()).toISOString().substr(0, 10),

@@ -24,8 +24,6 @@
           <p class="text-h4">Aplicaciones</p>
           <circular-chart
             v-if="loaded"
-            :componentId="componentId"
-            :dates="dates"
             :topFiveData="topFiveData"
           ></circular-chart>
         </v-col>
@@ -34,8 +32,6 @@
           <v-row>
             <v-col
               ><per-days
-                :componentId="componentId"
-                :dates="dates"
                 :pordias="porDias"
                 v-if="loadDaysData"
               >
@@ -43,8 +39,6 @@
             ></v-col>
             <v-col
               ><per-hours
-                :componentId="componentId"
-                :dates="dates"
                 :porhoras="porHoras"
                 v-if="loadHourData"
               ></per-hours
@@ -141,7 +135,7 @@ export default {
 
     loadDataForTopFive: async function () {
       this.loaded = false;
-      const resultado = await loadLogsTopFive(this.componentId, this.dates);
+      const resultado = await loadLogsTopFive(this.componentId, this.dates, this.logsData);
       this.topFiveData = resultado;
       this.loaded = true;
       // console.log("dash", this.topFiveData);

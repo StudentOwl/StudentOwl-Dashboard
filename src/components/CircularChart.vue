@@ -19,14 +19,6 @@ export default {
     DoughnutChart,
   },
   props: {
-    componentId: {
-      type: String,
-      required: true,
-    },
-    dates: {
-      type: Array,
-      required: true,
-    },
     topFiveData: {
       type: Array,
       required: true,

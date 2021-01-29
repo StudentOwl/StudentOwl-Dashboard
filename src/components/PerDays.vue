@@ -19,14 +19,6 @@ export default {
     LineChart,
   },
   props: {
-    componentId: {
-      type: String,
-      required: true,
-    },
-    dates: {
-      type: Array,
-      required: true,
-    },
     pordias: {
       type: Array,
       default: () => []

@@ -16,7 +16,7 @@
       <h2 class="text-h2">Estadisticas</h2>
 
       <!-- Selector de fechas -->
-      <range-date-picker @changeRange="onDatesUpdate" />
+      <!-- <range-date-picker @changeRange="onDatesUpdate" /> -->
 
       <!-- GRAFICOS GENERALES en componente -->
       <v-row>
@@ -62,7 +62,7 @@
 // @ is an alias to /src
 import CircularChart from "../components/CircularChart.vue";
 import PerHours from "../components/PerHours.vue";
-import RangeDatePicker from "../components/RangeDatePicker.vue";
+// import RangeDatePicker from "../components/RangeDatePicker.vue";
 import TableStudents from "../components/TableStudents.vue";
 import PerDays from "../components/PerDays.vue";
 
@@ -73,7 +73,7 @@ import {
   getHourData,
   getDiaData,
 } from "../utils/dataLoader";
-import { getPastWeek, getTodayFinal } from "../utils/dateutils";
+// import { getPastWeek, getTodayFinal } from "../utils/dateutils";
 import { loadLogsTopFive } from "../utils/topFive";
 
 export default {
@@ -82,7 +82,7 @@ export default {
     TableStudents,
     CircularChart,
     PerHours,
-    RangeDatePicker,
+    // RangeDatePicker,
     PerDays,
   },
   props: {
@@ -90,15 +90,19 @@ export default {
       type: String,
       required: true,
     },
+    dates: {
+      type: Array,
+      default: () => [],
+    }
   },
   data: () => ({
     studentsData: [],
     loaded: false,
     pingResul: "",
-    dates: [
-      getPastWeek(new Date()).toISOString().substr(0, 10),
-      getTodayFinal(new Date()).toISOString().substr(0, 10),
-    ],
+    // dates: [
+    //   getPastWeek(new Date()).toISOString().substr(0, 10),
+    //   getTodayFinal(new Date()).toISOString().substr(0, 10),
+    // ],
 
     logsData: [],
 
@@ -157,9 +161,9 @@ export default {
       this.loadDaysData = true;
     },
 
-    onDatesUpdate(newDates) {
-      this.dates = newDates;
-    },
+    // onDatesUpdate(newDates) {
+    //   this.dates = newDates;
+    // },
   },
 };
 </script>

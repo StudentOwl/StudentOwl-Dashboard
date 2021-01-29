@@ -93,26 +93,28 @@
                 <v-divider class="my-2"></v-divider>
 
                 <v-subheader>RANGO DE CONSULTA</v-subheader>
-                <v-date-picker
+                <!-- Selector de fechas -->
+                <range-date-picker @changeRange="onDatesUpdate" />
+                <!-- <v-date-picker
                   v-model="dates"
                   range
-                  scrollable
+                  no-title
                   full-width
-                  elevation="6"
+                  elevation="3"
                 >
-                  <!-- <v-spacer></v-spacer>
+                  <v-spacer></v-spacer>
                     <v-btn text color="primary" @click="menu = false">
                       Cancel
                     </v-btn>
-                    <v-btn text color="primary" @click="saveRange"> OK </v-btn> -->
-                </v-date-picker>
+                    <v-btn text color="primary" @click="saveRange"> OK </v-btn>
+                </v-date-picker> -->
               </v-list>
             </v-sheet>
           </v-col>
 
           <!-- Main Container -->
           <v-col cols="12" md="9">
-            <router-view @onauthenticated="setAuthenticated"></router-view>
+            <router-view @onauthenticated="setAuthenticated" :dates="dates"></router-view>
           </v-col>
         </v-row>
       </v-container>
@@ -121,13 +123,13 @@
 </template>
 
 <script>
-// import RangeDatePicker from "./components/RangeDatePicker.vue";
+import RangeDatePicker from "./components/RangeDatePicker.vue";
 import { getPastWeek } from "./utils/dateutils";
 
 export default {
   name: "App",
 
-  components: {},
+  components: {RangeDatePicker},
 
   data: () => ({
     drawer: null,
@@ -158,6 +160,9 @@ export default {
     },
     logout: function () {
       this.authenticated = false;
+    },
+    onDatesUpdate(newDates) {
+      this.dates = newDates;
     },
   },
 };

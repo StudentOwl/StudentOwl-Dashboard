@@ -53,29 +53,11 @@ export async function getLogsByComponentAndStudent(
   studentId,
   dates
 ) {
-  var student = `&msStudent=${studentId}`;
-  var msStart = `&msStart=${convertDateToMiliseconds(dates[0])}`;
-  var msEnd = `&msEnd=${convertDateToMiliseconds(dates[1])}`;
-
-  var query = `${API_URI}api/v1.0/logs/all?component=GTPR01${student}${msStart}${msEnd}`;
-  console.log(query);
-  try {
-    const res = await axios.get(query);
-    if (res) {
-      return res;
-    } else {
-      return null;
-    }
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-export async function getNamesbyStudent(studentId, dates) {
   var student = `&student=${studentId}`;
   var msStart = `&msStart=${convertDateToMiliseconds(dates[0])}`;
   var msEnd = `&msEnd=${convertDateToMiliseconds(dates[1])}`;
-  var query = `${API_URI}api/v1.0/logs/all?component=GTPR01${student}${msStart}${msEnd}`;
+
+  var query = `${API_URI}api/v1.0/logs/all?component=${componentId}${student}${msStart}${msEnd}`;
   console.log(query);
   try {
     const res = await axios.get(query);
@@ -109,16 +91,23 @@ export async function getDataToolbyDate(componentId, dates) {
 
 export function getLastActivities(logsData, studentData) {
   var dataClean = studentData.map(student => {
-    var newStudent = { username: student.username, name: `${student.lastname} ${student.name}` }
+    var newStudent = {
+      username: student.username,
+      name: `${student.lastname} ${student.name}`,
+    };
     return newStudent;
   });
 
   dataClean.forEach(student => {
     const findedLog = logsData.find(log => log.student === student.username);
-    
+
     if (findedLog) {
       const acctionTime = new Date(findedLog.time);
-      var date = new Date(acctionTime.getFullYear(), acctionTime.getMonth(), acctionTime.getDate())
+      var date = new Date(
+        acctionTime.getFullYear(),
+        acctionTime.getMonth(),
+        acctionTime.getDate()
+      );
 
       student["lastAction"] = findedLog.action;
       student["lastDate"] = date;
@@ -151,3 +140,18 @@ export async function getLogsTopFive(componentId, dates) {
   }
 }
 
+export async function getInfoStudent(studentId) {
+  const query = `${API_URI}api/v1.0/students/find?student=${studentId}`;
+
+  try {
+    const res = await axios.get(query);
+
+    if (res) {
+      return res;
+    } else {
+      return null;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}

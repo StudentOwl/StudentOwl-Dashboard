@@ -143,7 +143,7 @@ export default {
   },
   methods: {
     setAuthenticated: function (status) {
-      console.log(status);
+      // console.log(status);
       this.authenticated = status;
     },
     logout: function () {

@@ -76,6 +76,7 @@
                   v-for="component in components"
                   :key="component.code"
                   link
+                  :to="`/dashboard/${component.code}`"
                 >
                   <v-list-item-content>
                     <v-list-item-title>
@@ -85,13 +86,21 @@
                 </v-list-item>
 
                 <v-divider class="my-2"></v-divider>
+                
+                  <v-date-picker v-model="dates" range scrollable full-width elevation="6">
+                    <!-- <v-spacer></v-spacer>
+                    <v-btn text color="primary" @click="menu = false">
+                      Cancel
+                    </v-btn>
+                    <v-btn text color="primary" @click="saveRange"> OK </v-btn> -->
+                  </v-date-picker>
               </v-list>
             </v-sheet>
           </v-col>
 
           <!-- Main Container -->
           <v-col cols="12" md="9">
-            <router-view></router-view>
+            <router-view @onauthenticated="setAuthenticated"></router-view>
           </v-col>
         </v-row>
       </v-container>
@@ -100,6 +109,9 @@
 </template>
 
 <script>
+// import RangeDatePicker from "./components/RangeDatePicker.vue";
+import { getPastWeek } from "./utils/dateutils";
+
 export default {
   name: "App",
 
@@ -108,29 +120,35 @@ export default {
   data: () => ({
     drawer: null,
     components: [
-      { name: "Gestion de proyectos", code: "GTPR01" },
+      { name: "Gestión de proyectos", code: "GTPR01" },
       { name: "Ingenieria de requisitos", code: "IGRT01" },
-      { name: "Gestion Productiva", code: "GSPR01" },
+      { name: "Gestión Productiva", code: "GSPR01" },
     ],
     authenticated: false,
     studentOwlAccount: {
       username: "mpabad",
       password: "12345",
     },
-    mounted() {
-      if (!this.authenticated) {
-        this.$router.replace({ name: "Login" });
-      }
-    },
-    methods: {
-      setAuthenticated: function (status) {
-        console.log(status);
-        this.authenticated = status;
-      },
-      logout: function () {
-        this.authenticated = false;
-      },
-    },
+    dates: [
+      getPastWeek(new Date())
+        .toISOString()
+        .substr(0, 10),
+      new Date().toISOString().substr(0, 10),
+    ],
   }),
+  mounted() {
+    if (!this.authenticated) {
+      this.$router.replace({ name: "Login" });
+    }
+  },
+  methods: {
+    setAuthenticated: function (status) {
+      console.log(status);
+      this.authenticated = status;
+    },
+    logout: function () {
+      this.authenticated = false;
+    },
+  },
 };
 </script>

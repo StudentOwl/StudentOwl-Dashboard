@@ -155,3 +155,39 @@ export async function getInfoStudent(studentId) {
     console.log(err);
   }
 }
+
+export async function getHourData(componentId, dates) {
+  var msStart = `&msStart=${convertDateToMiliseconds(dates[0])}`;
+  var msEnd = `&msEnd=${convertDateToMiliseconds(dates[1])}`;
+  const query = `${API_URI}api/v1.0/logs/data/timeperhour?component=${componentId}${msStart}${msEnd}`;
+
+  try {
+    const res = await axios.get(query);
+
+    if (res) {
+      return res;
+    } else {
+      return null;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function getDiaData(componentId, dates) {
+  var msStart = `&msStart=${convertDateToMiliseconds(dates[0])}`;
+  var msEnd = `&msEnd=${convertDateToMiliseconds(dates[1])}`;
+  const query = `${API_URI}api/v1.0/logs/data/timeperday?component=${componentId}${msStart}${msEnd}`;
+
+  try {
+    const res = await axios.get(query);
+
+    if (res) {
+      return res;
+    } else {
+      return null;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}

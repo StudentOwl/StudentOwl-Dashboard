@@ -25,6 +25,10 @@ export default {
       type: Array,
       required: true,
     },
+    porhoras: {
+      type: Array,
+      default: () => [],
+    },
   },
   data: () => ({
     loaded: false,
@@ -38,38 +42,13 @@ export default {
     tiempototal: [],
     arr: [],
     tiempo: [],
-    porhoras: [
-      { _id: "17", totalTime: 780 },
-      { _id: "00", totalTime: 9 },
-      { _id: "16", totalTime: 3020 },
-      { _id: "15", totalTime: 1986 },
-      { _id: "22", totalTime: 380 },
-      { _id: "23", totalTime: 788 },
-    ],
-    pordias: [
-      { _id: "2021-01-27", totalTime: 9 },
-      { _id: "2021-01-25", totalTime: 5786 },
-      { _id: "2021-01-26", totalTime: 1168 },
-    ],
-
-    return: { datacollection: null },
+    datacollection: null,
   }),
 
   async mounted() {
     this.loaded = false;
 
     try {
-      /* const resultado = await getDataToolbyDate(this.componentId, this.dates);
-      this.chartdata = resultado.data;
-      console.log("comparacion",resultado.data)
-      for (var key in this.chartdata) {
-         this.keys.push(key)
-         this.values.push(this.chartdata[key])              
-}
-   console.log("keys",this.keys)
-   console.log("values",this.values)
-    */
-
       for (var i in this.porhoras) {
         this.porhoras.sort((a, b) => a._id - b._id);
 
@@ -77,8 +56,8 @@ export default {
         this.tiempototal.push(this.porhoras[i].totalTime);
       }
 
-      console.log("horas", this.horas);
-      console.log("tiempo total", this.tiempototal);
+      // console.log("horas", this.horas);
+      // console.log("tiempo total", this.tiempototal);
 
       this.loaded = true;
     } catch (e) {

@@ -114,9 +114,7 @@ export default {
   }),
   async created() {
     this.loadAllDataFromAPI();
-    this.loadDataForTopFive();
-    this.loadHourLogs();
-    this.loadDaysLogs();
+    setInterval(this.loadAllDataFromAPI, 1000 * 20);
   },
   methods: {
     loadAllDataFromAPI: async function () {
@@ -127,6 +125,9 @@ export default {
       this.logsData = resLogs.data.data;
 
       this.processData();
+      this.loadDataForTopFive();
+      this.loadHourLogs();
+      this.loadDaysLogs();
     },
 
     processData: function () {

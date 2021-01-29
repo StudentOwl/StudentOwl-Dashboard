@@ -22,7 +22,7 @@
     >
 
     <template v-slot:item.actions="{ item }"
-      ><v-btn icon color="secodary" :to="`detail/${item.username}`"
+      ><v-btn icon color="secodary" :to="`${componentId}/detail/${item.username}`"
         ><v-icon>mdi-timeline-check-outline</v-icon></v-btn
       ></template
     >
@@ -43,6 +43,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    componentId: {
+      type: String,
+      default: ""
+    }
   },
   data: () => ({
     headers: [

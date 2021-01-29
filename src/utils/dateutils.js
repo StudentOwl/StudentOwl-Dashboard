@@ -4,6 +4,12 @@ export function getPastWeek(fechaActual) {
   return lastWeek;
 }
 
+export function getTodayFinal(fechaActual) {
+  var todayLast = new Date();
+  todayLast.setDate(fechaActual.getDate() + 1);
+  return todayLast;
+}
+
 export function convertDateToMiliseconds(date) {
   var tokens = date.split("-");
   var year = parseInt(tokens[0]);

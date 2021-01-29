@@ -1,6 +1,6 @@
 <template>
   <v-card class="px-10 py-6" elevation="5" color="secondary" rounded="xl">
-    <p class="text-h4 white--text">Top 5</p>
+    <p class="text-h4 white--text">Las 5 más usadas</p>
     <doughnut-chart
       v-if="loaded"
       :chart-data="datacollection"

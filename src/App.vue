@@ -123,7 +123,7 @@ export default {
     drawer: null,
     components: [
       { name: "Gestión de proyectos", code: "GTPR01" },
-      { name: "Ingenieria de requisitos", code: "IGRT01" },
+      { name: "Ingeniería de requisitos", code: "IGRT01" },
       { name: "Gestión Productiva", code: "GSPR01" },
     ],
     authenticated: false,

@@ -1,6 +1,6 @@
 <template>
   <v-card class="px-6 py-6" elevation="5" color="secondary" rounded="xl">
-    <h1 class="text-h5 white--text">Por dias</h1>
+    <h1 class="text-h5 white--text">Por días</h1>
     <line-chart
       v-if="loaded"
       :chart-data="datacollection"

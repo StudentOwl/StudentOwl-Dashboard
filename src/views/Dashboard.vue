@@ -3,7 +3,7 @@
     <section class="mt-10">
       <h2 class="text-h2">Estudiantes</h2>
       <!-- TABLA principal en componente -->
-      <table-students :students="mainTableData" :isLoading="isLoadingMainTableData" ></table-students>
+      <table-students :students="mainTableData" :isLoading="isLoadingMainTableData" :componentId="componentId" ></table-students>
     </section>
 
     <v-divider></v-divider>
@@ -28,7 +28,7 @@
         <v-col  cols="12" md="6">
           <p class="text-h4">Tiempo de uso</p>
           <v-row>
-            <v-col><per-days> </per-days></v-col>
+            <v-col><per-days :componentId="componentId" :dates="dates"> </per-days></v-col>
             <v-col><per-hours :componentId="componentId" :dates="dates"></per-hours></v-col>
           </v-row>
         </v-col>
@@ -48,7 +48,7 @@ import TableStudents from "../components/TableStudents.vue";
 import PerDays from "../components/PerDays.vue";
 
 import { getStudentByComponent, getLogsByComponent, getLastActivities } from "../utils/dataLoader";
-import { getPastWeek } from "../utils/dateutils";
+import { getPastWeek, getTodayFinal } from "../utils/dateutils";
 import{loadLogsTopFive}from "../utils/topFive";
 
 export default {
@@ -72,7 +72,7 @@ export default {
     pingResul: "",
     dates: [
       getPastWeek(new Date()).toISOString().substr(0, 10),
-      new Date().toISOString().substr(0, 10),
+      getTodayFinal(new Date()).toISOString().substr(0, 10),
     ],
     logsData: [],
     mainTableData: [],

@@ -1,53 +1,69 @@
 <template>
-  <v-card elevation="2">
-    <h2 class="text-h2">Circle chart</h2>
-    <line-chart
+  <v-card class="px-10 py-6" elevation="5" color="secondary" rounded="xl">
+    <p class="text-h4 white--text">Las 5 más usadas</p>
+    <doughnut-chart
       v-if="loaded"
       :chart-data="datacollection"
-      :height="450"
-    ></line-chart>
+      :chartOptions="chartOptions"
+    >
+    </doughnut-chart>
   </v-card>
 </template>
 
 <script>
-import { getDataToolbyDate } from "../utils/dataLoader";
-import LineChart from "./DoughnutChart.vue";
+//import { getDataToolbyDate } from "../utils/dataLoader";
+import DoughnutChart from "./DoughnutChart.vue";
 export default {
   name: "CircularChart",
   components: {
-    LineChart,
+    DoughnutChart,
   },
   props: {
-    componentId: {
-      type: String,
-      required: true,
-    },
-    dates: {
+    topFiveData: {
       type: Array,
       required: true,
     },
   },
   data: () => ({
     loaded: false,
-    chartdata: null,
+    //arreglos para recibir proper
     keys: [],
     values: [],
+    chartOptions: {
+      responsive: true,
+      maintainAspectRatio: true,
+      legend: {
+        display: true,
+        // position: 'bottom'
+        position: "bottom",
+        labels: {
+          boxWidth: 14,
+          fontSize: 14,
+          fontColor: "#fff",
+        },
+      },
+      elements: {
+        arc: {
+          borderColor: "transparent",
+        },
+      },
+    },
     return: { datacollection: null },
   }),
 
-  async mounted() {
+  mounted() {
     this.loaded = false;
+    //probando array
+    // console.log(this.topFiveData);
     try {
-      const resultado = await getDataToolbyDate(this.componentId, this.dates);
-      this.chartdata = resultado.data;
-      for (var key in this.chartdata) {
-        this.keys.push(key);
-        this.values.push(this.chartdata[key]);
-      }
-
-      this.loaded = true;
+      //Recupero los datos del array  para mandar al diagrama
+      this.topFiveData.forEach(element => {
+        this.keys.push(element.nameTools);
+        this.values.push(element.duration);
+        this.loaded = true;
+      });
     } catch (e) {
-      console.error(e, "No se ejectuto bien el mountd");
+      console.error(e, "No se ejecuto bien el mounted");
     }
     this.fillData();
   },
@@ -57,14 +73,13 @@ export default {
         labels: this.keys,
         datasets: [
           {
-            label: this.keys,
+            //colores grafico
             backgroundColor: [
-              "#385f71",
-              "#2b4162",
-              "#385f71",
-              "#f5f0f6",
-              "#d7b377",
-              "#8f754f",
+              "#dceed1",
+              "#aac0aa",
+              "#736372",
+              "#a18276",
+              "#dec0f1",
             ],
             data: this.values,
           },

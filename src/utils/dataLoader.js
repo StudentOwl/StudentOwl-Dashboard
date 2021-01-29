@@ -35,7 +35,7 @@ export async function getLogsByComponent(componentId, dates) {
   var msEnd = `&msEnd=${convertDateToMiliseconds(dates[1])}`;
 
   var query = `${API_URI}api/v1.0/logs/all?component=${componentId}${msStart}${msEnd}`;
-  console.log(query);
+  console.log("LogsByComponent", query);
   try {
     const res = await axios.get(query);
     if (res) {
@@ -53,29 +53,12 @@ export async function getLogsByComponentAndStudent(
   studentId,
   dates
 ) {
-  var student = `&msStudent=${studentId}`;
+  var student = `&student=${studentId}`;
   var msStart = `&msStart=${convertDateToMiliseconds(dates[0])}`;
   var msEnd = `&msEnd=${convertDateToMiliseconds(dates[1])}`;
 
-  var query = `${API_URI}api/v1.0/logs/all?component=GTPR01${student}${msStart}${msEnd}`;
-  console.log(query);
-  try {
-    const res = await axios.get(query);
-    if (res) {
-      return res;
-    } else {
-      return null;
-    }
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-export async function getNamesbyStudent(studentId) {
-  var student = `&msStudent=${studentId}`;
-
-  var query = `${API_URI}api/v1.0/logs/all?student=${student}`;
-  console.log(query);
+  var query = `${API_URI}api/v1.0/logs/all?component=${componentId}${student}${msStart}${msEnd}`;
+  console.log("LogsByComponentAndStudent", query);
   try {
     const res = await axios.get(query);
     if (res) {
@@ -92,10 +75,113 @@ export async function getDataToolbyDate(componentId, dates) {
   var msStart = `&msStart=${convertDateToMiliseconds(dates[0])}`;
   var msEnd = `&msEnd=${convertDateToMiliseconds(dates[1])}`;
 
-  var query = `${API_URI}api/v1.0/logs/data/all?component=${componentId}${msStart}${msEnd}`;
-  console.log(query);
+  var query = `${API_URI}api/v1.0/logs/data/applicationuse?component=${componentId}${msStart}${msEnd}`;
+  console.log("DataToolbyDate", query);
   try {
     const res = await axios.get(query);
+    if (res) {
+      return res;
+    } else {
+      return null;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export function getLastActivities(logsData, studentData) {
+  var dataClean = studentData.map(student => {
+    var newStudent = {
+      username: student.username,
+      name: `${student.lastname} ${student.name}`,
+    };
+    return newStudent;
+  });
+
+  dataClean.forEach(student => {
+    const findedLog = logsData.find(log => log.student === student.username);
+
+    if (findedLog) {
+      const acctionTime = new Date(findedLog.time);
+      var date = new Date(
+        acctionTime.getFullYear(),
+        acctionTime.getMonth(),
+        acctionTime.getDate()
+      );
+
+      student["lastAction"] = findedLog.action;
+      student["lastDate"] = date;
+      student["lastTime"] = new Date(findedLog.time);
+    } else {
+      student["lastAction"] = "-";
+      student["lastDate"] = "-";
+      student["lastTime"] = "-";
+    }
+  });
+  return dataClean;
+}
+
+//Metodo para filtrar un top 5 de herramientas
+export async function getLogsTopFive(componentId, dates) {
+  var msStart = `&msStart=${convertDateToMiliseconds(dates[0])}`;
+  var msEnd = `&msEnd=${convertDateToMiliseconds(dates[1])}`;
+
+  var query = `${API_URI}api/v1.0/logs/all?component=${componentId}${msStart}${msEnd}`;
+  console.log("LogsTopFive", query);
+  try {
+    const res = await axios.get(query);
+    if (res) {
+      return res;
+    } else {
+      return null;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function getInfoStudent(studentId) {
+  const query = `${API_URI}api/v1.0/students/find?student=${studentId}`;
+
+  try {
+    const res = await axios.get(query);
+
+    if (res) {
+      return res;
+    } else {
+      return null;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function getHourData(componentId, dates) {
+  var msStart = `&msStart=${convertDateToMiliseconds(dates[0])}`;
+  var msEnd = `&msEnd=${convertDateToMiliseconds(dates[1])}`;
+  const query = `${API_URI}api/v1.0/logs/data/timeperhour?component=${componentId}${msStart}${msEnd}`;
+
+  try {
+    const res = await axios.get(query);
+
+    if (res) {
+      return res;
+    } else {
+      return null;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function getDiaData(componentId, dates) {
+  var msStart = `&msStart=${convertDateToMiliseconds(dates[0])}`;
+  var msEnd = `&msEnd=${convertDateToMiliseconds(dates[1])}`;
+  const query = `${API_URI}api/v1.0/logs/data/timeperday?component=${componentId}${msStart}${msEnd}`;
+
+  try {
+    const res = await axios.get(query);
+
     if (res) {
       return res;
     } else {

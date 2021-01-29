@@ -1,86 +1,81 @@
 <template>
   <div class="detail">
-    <section class="pa-6">
+    <section class="mt-10">
       <!--Nombre del Estudiante-->
-      <h2 class="text-h2">Juan Gahona</h2>
-      <!--Visualización de la tabla de detalles-->
-      <table-details :details="detailsData"></table-details>
-    </section>
-
-    <section class="pa-6">
+      <!-- reemplazar this.student por el name y lastname -->
       <h2 class="text-h2">
-        Estadisticas
+        {{ studentData.lastname }} {{ studentData.name }}
       </h2>
-      <div class="d-flex justify-space-between mb-6">
-        <!--Visualización de gráfico de curvas-->
-        <curve-chart></curve-chart>
-      </div>
-      <div class="d-flex justify-space-between mb-6">
-        <!--Visualización de gráfico de curvas-->
-
-        <code v-if="namesData">{{ namesData.name }}</code>
-      </div>
+      <!--Visualización de la tabla de detalles-->
+    </section>
+    <section class="mt-10">
+      <h2 class="text-h2 mb-6">Timeline</h2>
+      <v-card class="overflow-y-auto" max-height="80vh">
+        <v-card-text>
+          <v-container>
+            <TimeLineDetails :detailsData="detailsData" />
+          </v-container>
+        </v-card-text>
+      </v-card>
     </section>
   </div>
 </template>
-
 <script>
-import CurveChart from "../components/CurveChart.vue";
-import TableDetails from "../components/TableDetails.vue";
-import { getPastWeek } from "../utils/dateutils.js";
+//import CurveChart from "../components/CurveChart.vue";
+import TimeLineDetails from "../components/TimeLineDetails.vue";
 
-import {
-  getLogsByComponentAndStudent,
-  getNamesbyStudent,
-} from "../utils/dataLoader";
+import { getLogsByComponentAndStudent, getInfoStudent } from "../utils/dataLoader";
 
 export default {
   name: "Detail",
   components: {
-    TableDetails,
-    CurveChart,
+    TimeLineDetails,
   },
   props: {
+    componentId: {
+      type: String,
+      required: true
+    },
     student: {
       type: String,
       required: true,
     },
+    dates: {
+      type: Array,
+      default: () => [],
+    }
   },
   data: () => ({
     detailsData: [],
-    namesData: [],
-    pingResul: "",
-    dates: [
-      getPastWeek(new Date())
-        .toISOString()
-        .substr(0, 10),
-      new Date().toISOString().substr(0, 10),
-    ],
+    studentData: {
+      type: Object,
+      default: () => {}
+    }
   }),
   async created() {
+    this.loadStudentInfo();
     this.loadDetailsData();
-    this.loadNameStudent();
   },
   methods: {
-    loadDetailsData: async function() {
+    loadDetailsData: async function () {
       const resultado = await getLogsByComponentAndStudent(
         this.componentId,
         this.student,
         this.dates
       );
-      // this.pingResul = resultado.data;
-      this.detailsData = resultado.data.data;
+      if (resultado) {
+        this.detailsData = resultado.data.data;
+      } else {
+        console.log("Problema");
+      }
     },
+    loadStudentInfo: async function () {
+      const resultado = await getInfoStudent(this.student);
 
-    loadNameStudent: async function() {
-      const resultado = await getNamesbyStudent(this.student);
-      // this.pingResul = resultado.data;
-      this.namesData = resultado.data.data;
-    },
-
-    onDatesUpdate(newDates) {
-      this.dates = newDates;
-    },
+      if (resultado) {
+        this.studentData = resultado.data.data;
+      }
+    }
   },
 };
 </script>

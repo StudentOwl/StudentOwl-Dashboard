@@ -6,6 +6,7 @@
       app
       color="white"
       temporary
+      v-if="authenticated"
     >
       <v-list-item>
         <v-list-item-content>
@@ -38,6 +39,7 @@
         <v-app-bar-nav-icon
           class="d-md-none"
           @click="drawer = !drawer"
+          v-if="authenticated"
         ></v-app-bar-nav-icon>
         <div class="d-flex align-center">
           <v-toolbar-title>DASHBOARD</v-toolbar-title>
@@ -69,31 +71,41 @@
     <v-main>
       <v-container>
         <v-row>
-          <v-col class="d-none d-md-block" md="3">
+          <v-col class="d-none d-md-block" md="3" v-if="authenticated">
             <v-sheet rounded="lg">
               <v-list color="transparent">
-                <v-list-item
-                  v-for="component in components"
-                  :key="component.code"
-                  link
-                  :to="`/dashboard/${component.code}`"
-                >
-                  <v-list-item-content>
-                    <v-list-item-title>
-                      {{ component.name }}
-                    </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
+                <v-subheader>COMPONENTES</v-subheader>
+                <v-list-item-group>
+                  <v-list-item
+                    v-for="component in components"
+                    :key="component.code"
+                    link
+                    :to="`/dashboard/${component.code}`"
+                  >
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        {{ component.name }}
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-list-item-group>
 
                 <v-divider class="my-2"></v-divider>
-                
-                  <v-date-picker v-model="dates" range scrollable full-width elevation="6">
-                    <!-- <v-spacer></v-spacer>
+
+                <v-subheader>RANGO DE CONSULTA</v-subheader>
+                <v-date-picker
+                  v-model="dates"
+                  range
+                  scrollable
+                  full-width
+                  elevation="6"
+                >
+                  <!-- <v-spacer></v-spacer>
                     <v-btn text color="primary" @click="menu = false">
                       Cancel
                     </v-btn>
                     <v-btn text color="primary" @click="saveRange"> OK </v-btn> -->
-                  </v-date-picker>
+                </v-date-picker>
               </v-list>
             </v-sheet>
           </v-col>
@@ -130,9 +142,7 @@ export default {
       password: "12345",
     },
     dates: [
-      getPastWeek(new Date())
-        .toISOString()
-        .substr(0, 10),
+      getPastWeek(new Date()).toISOString().substr(0, 10),
       new Date().toISOString().substr(0, 10),
     ],
   }),

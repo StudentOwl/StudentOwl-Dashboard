@@ -13,7 +13,7 @@
     <v-divider></v-divider>
 
     <section class="mt-10">
-      <h2 class="text-h2">Estadisticas</h2>
+      <h2 class="text-h2">Estadísticas</h2>
 
       <!-- Selector de fechas -->
       <!-- <range-date-picker @changeRange="onDatesUpdate" /> -->
@@ -31,17 +31,10 @@
           <p class="text-h4">Tiempo de uso</p>
           <v-row>
             <v-col
-              ><per-days
-                :pordias="porDias"
-                v-if="loadDaysData"
-              >
-              </per-days
+              ><per-days :pordias="porDias" v-if="loadDaysData"> </per-days
             ></v-col>
             <v-col
-              ><per-hours
-                :porhoras="porHoras"
-                v-if="loadHourData"
-              ></per-hours
+              ><per-hours :porhoras="porHoras" v-if="loadHourData"></per-hours
             ></v-col>
           </v-row>
         </v-col>
@@ -87,16 +80,12 @@ export default {
     dates: {
       type: Array,
       default: () => [],
-    }
+    },
   },
   data: () => ({
     studentsData: [],
     loaded: false,
     pingResul: "",
-    // dates: [
-    //   getPastWeek(new Date()).toISOString().substr(0, 10),
-    //   getTodayFinal(new Date()).toISOString().substr(0, 10),
-    // ],
 
     logsData: [],
 
@@ -109,10 +98,12 @@ export default {
     loadHourData: false,
     porDias: [],
     loadDaysData: false,
+
+    interval: null,
   }),
   async created() {
     this.loadAllDataFromAPI();
-    setInterval(this.loadAllDataFromAPI, 1000 * 20);
+    this.interval = setInterval(this.loadAllDataFromAPI, 1000 * 20);
   },
   methods: {
     loadAllDataFromAPI: async function () {
@@ -135,7 +126,11 @@ export default {
 
     loadDataForTopFive: async function () {
       this.loaded = false;
-      const resultado = await loadLogsTopFive(this.componentId, this.dates, this.logsData);
+      const resultado = await loadLogsTopFive(
+        this.componentId,
+        this.dates,
+        this.logsData
+      );
       this.topFiveData = resultado;
       this.loaded = true;
       // console.log("dash", this.topFiveData);
@@ -159,5 +154,8 @@ export default {
     //   this.dates = newDates;
     // },
   },
+  beforeDestroy() {
+    clearInterval(this.interval);
+  }
 };
 </script>

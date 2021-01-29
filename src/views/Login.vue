@@ -32,7 +32,7 @@
               ></v-text-field
             ></v-col>
             <v-col sm="12" class="px-16">
-              <v-btn color="secondary" outlined block @click="login()"
+              <v-btn color="secondary" outlined block v-on:click="login()"
                 >Iniciar</v-btn
               >
             </v-col>
@@ -56,11 +56,11 @@ export default {
     login: function() {
       if (this.input.username != "" && this.input.password != "") {
         if (
-          this.input.username == this.$parent.studentOwlAccount.username &&
-          this.input.password == this.$parent.studentOwlAccount.password
+          this.input.username == "mpabad" &&
+          this.input.password == "12345"
         ) {
-          this.$emit("onAuthenticated", true);
-          this.$router.replace({ name: "Dashboard" });
+          this.$emit("onauthenticated", true);
+          this.$router.replace({ name: "Dashboard", params: { componentId: "GTPR01" } });
         } else {
           console.log("El usuario y contrasenia son incorrectos");
         }

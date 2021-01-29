@@ -41,17 +41,22 @@
           @click="drawer = !drawer"
           v-if="authenticated"
         ></v-app-bar-nav-icon>
-        <div class="d-flex align-center">
+        <v-img
+          class="mx-2"
+          src="./assets/StudentOwlPet-White.png"
+          max-height="70"
+          max-width="70"
+        ></v-img>
+
           <v-toolbar-title>DASHBOARD</v-toolbar-title>
-        </div>
 
         <v-spacer></v-spacer>
 
-        <v-btn text>
+        <v-btn text class="d-none d-md-block">
           <v-icon>mdi-home</v-icon>
           <span class="ml-2">Inicio</span>
         </v-btn>
-        <v-btn text>
+        <v-btn text class="d-none d-md-block">
           <v-icon>mdi-information-outline</v-icon>
           <span class="ml-2">Acerca de</span>
         </v-btn>
@@ -61,6 +66,7 @@
           to="/login"
           @click.native="logout"
           replace=""
+          class="d-none d-md-block"
         >
           <v-icon>mdi-logout</v-icon>
           <span class="ml-2">Logout</span>
@@ -94,7 +100,13 @@
 
                 <v-subheader>RANGO DE CONSULTA</v-subheader>
                 <!-- Selector de fechas -->
-                <v-date-picker v-model="dates" range no-title full-width elevation="3">
+                <v-date-picker
+                  v-model="dates"
+                  range
+                  no-title
+                  full-width
+                  elevation="3"
+                >
                 </v-date-picker>
                 <pre>{{ dateRangeText }}</pre>
               </v-list>
@@ -103,7 +115,10 @@
 
           <!-- Main Container -->
           <v-col cols="12" md="9">
-            <router-view @onauthenticated="setAuthenticated" :dates="dates"></router-view>
+            <router-view
+              @onauthenticated="setAuthenticated"
+              :dates="dates"
+            ></router-view>
           </v-col>
         </v-row>
       </v-container>
@@ -151,7 +166,7 @@ export default {
     },
     onDatesUpdate(newDates) {
       this.dates = newDates;
-    }
+    },
   },
   computed: {
     dateRangeText() {
